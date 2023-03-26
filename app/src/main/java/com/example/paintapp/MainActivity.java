@@ -2,6 +2,7 @@ package com.example.paintapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -14,23 +15,22 @@ import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.graphics.Path;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.Toast;
+import yuku.ambilwarna.AmbilWarnaDialog;
 
-import static com.example.paintapp.display.bitmap;
 import static com.example.paintapp.display.current_brush;
 import static com.example.paintapp.display.drawPaint;
 import static com.example.paintapp.display.drawPath;
-
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
     public static Path path = new Path();
     public static Paint brush = new Paint();
-    View imgView;
-    View motionLayer;
-    float offsetX, offsetY;
-    float refX, refY;
+    Bundle myBundle;
+    Button pencil, eraser, color_button, zoomImg, newPaint, save, dowloadImg;
+    int mDefault;
+    View imgView, motionLayer;
+    float offsetX, offsetY, refX, refY;
 
     ScaleGestureDetector scaleDetector;
     float scaleFactor = 1.0f;
@@ -69,27 +69,73 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        imgView = (View) findViewById(R.id.drawView);
+        myBundle = savedInstanceState;
+
+        pencil = (Button) findViewById(R.id.pencil);
+        eraser = (Button) findViewById(R.id.eraser);
+        color_button = (Button) findViewById(R.id.color_button);
+        zoomImg = (Button) findViewById(R.id.zoomImg);
+        newPaint = (Button) findViewById(R.id.newPaint);
+        save = (Button) findViewById(R.id.save);
+        dowloadImg = (Button) findViewById(R.id.dowloadImg);
+
+        pencil.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawPaint.setColor(Color.BLACK);
+                currentColor(drawPaint.getColor());
+            }
+        });
+
+        eraser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                drawPath.reset();
+            }
+        });
+
+        mDefault = ContextCompat.getColor(MainActivity.this, R.color.black);
+        color_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                openColorPicker();
+            }
+        });
+
+        zoomImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                zoomImgage();
+            }
+        });
+
+        newPaint.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                new_Paint();
+            }
+        });
+
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            }
+        });
+
+        dowloadImg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dowloadImage();
+            }
+        });
     }
-
-    public void redColor(View v) {
-
-    }
-
-    public void pencil(View v) {
-        drawPaint.setColor(Color.BLACK);
-        currentColor(drawPaint.getColor());
-    }
-
-    public void eraser(View v) {
-       drawPath.reset();
-    }
-
     public void currentColor(int c) {
         current_brush = c;
         path = new Path();
     }
 
-    public void newPaint(View v) {
+    private void new_Paint() {
         AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
         newDialog.setTitle("New drawing");
         newDialog.setMessage("Start new drawing (you will lose the current drawing)?");
@@ -107,13 +153,13 @@ public class MainActivity extends AppCompatActivity {
         newDialog.show();
     }
 
-    public void dowloadPaint(View v) {
+    private void dowloadImage() {
         AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
         saveDialog.setTitle("Save drawing");
         saveDialog.setMessage("Save drawing to device Gallery?");
         saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
             public void onClick(DialogInterface dialog, int which){
-                imgView = (View) findViewById(R.id.drawView);
+
                 imgView.setDrawingCacheEnabled(true);
                 String imgSaved = MediaStore.Images.Media.insertImage(
                         getContentResolver(), imgView.getDrawingCache(),
@@ -139,7 +185,7 @@ public class MainActivity extends AppCompatActivity {
         saveDialog.show();
     }
 
-    public void zoomImg(View v) {
+    private void zoomImgage() {
         imgView = (View) findViewById(R.id.drawView);
         motionLayer = (View) findViewById(R.id.motionLayer);
         scaleDetector = new ScaleGestureDetector(motionLayer.getContext(), new ScaleListener());
@@ -179,41 +225,18 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void openColorPicker(View v){
-        setContentView(R.layout.color_picker);
-        ImageView imgcolorpicker = (ImageView) findViewById(R.id.imgcolorpicker);
-        imgcolorpicker.setDrawingCacheEnabled(true);
-        imgcolorpicker.buildDrawingCache(true);
-        Button btn_ok = (Button)findViewById(R.id.btn_ok);
-        Button btn_close = (Button)findViewById(R.id.btn_close);
-        View viewColor = (View)findViewById(R.id.view_color);
-
-        imgcolorpicker.setOnTouchListener(new View.OnTouchListener() {
+    private void openColorPicker(){
+        AmbilWarnaDialog color_picker = new AmbilWarnaDialog(this, mDefault, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN || motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
-                    bitmap = imgcolorpicker.getDrawingCache();
-                    int pixel = bitmap.getPixel((int)motionEvent.getX(), (int)motionEvent.getY());
-                    int r = Color.red(pixel);
-                    int g = Color.green(pixel);
-                    int b = Color.blue(pixel);
-                    viewColor.setBackgroundColor(Color.rgb(r, g, b));
-                    drawPaint.setColor(Color.rgb(r, g, b));
-                }
-                return true;
+            public void onCancel(AmbilWarnaDialog dialog) {
+            }
+
+            @Override
+            public void onOk(AmbilWarnaDialog dialog, int color) {
+                mDefault = color;
+                drawPaint.setColor(mDefault);
             }
         });
-
-        btn_ok.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-            }
-        });
-        btn_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-            }
-        });
+        color_picker.show();
     }
 }
