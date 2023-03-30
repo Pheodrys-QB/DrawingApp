@@ -11,7 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-
+import static com.example.paintapp.MainActivity.path;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -21,7 +21,8 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
     public static Bitmap bitmap;
     public static Canvas mcanvas;
 
-    public static Path drawPath;
+    public static ArrayList<Path> drawPathList = new ArrayList<>();
+    public static ArrayList<Integer> colorList = new ArrayList<>();
     public static Paint drawPaint, canvasPaint;
     public static int current_brush = Color.BLACK;
 
@@ -41,7 +42,7 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
     }
 
     private void init(Context context){
-        drawPath = new Path();
+        //drawPath = new Path();
         drawPaint = new Paint();
 
         drawPaint.setColor(current_brush);
@@ -66,10 +67,12 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
         float touchY = event.getY();
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
-                drawPath.moveTo(touchX, touchY);
+                path.moveTo(touchX, touchY);
                 break;
             case MotionEvent.ACTION_MOVE:
-                drawPath.lineTo(touchX, touchY);
+                path.lineTo(touchX, touchY);
+                drawPathList.add(path);
+                colorList.add(current_brush);
                 break;
             default:
                 return false;
@@ -80,7 +83,10 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        canvas.drawBitmap(bitmap, 0, 0, canvasPaint);
-        canvas.drawPath(drawPath, drawPaint);
+        for(int i = 0; i < drawPathList.size(); i++){
+            canvas.drawBitmap(bitmap, 0, 0, canvasPaint);
+            drawPaint.setColor(colorList.get(i));
+            canvas.drawPath(drawPathList.get(i), drawPaint);
+        }
     }
 }

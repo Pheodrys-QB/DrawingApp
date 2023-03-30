@@ -20,7 +20,7 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 
 import static com.example.paintapp.display.current_brush;
 import static com.example.paintapp.display.drawPaint;
-import static com.example.paintapp.display.drawPath;
+//import static com.example.paintapp.display.drawPath;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         eraser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                drawPath.reset();
+//                drawPath.reset();
             }
         });
 
@@ -141,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
         newDialog.setMessage("Start new drawing (you will lose the current drawing)?");
         newDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                drawPath.reset();
+//                drawPath.reset();
                 dialog.dismiss();
             }
         });
@@ -235,6 +235,7 @@ public class MainActivity extends AppCompatActivity {
             public void onOk(AmbilWarnaDialog dialog, int color) {
                 mDefault = color;
                 drawPaint.setColor(mDefault);
+                currentColor(drawPaint.getColor());
             }
         });
         color_picker.show();
