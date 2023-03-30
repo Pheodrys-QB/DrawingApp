@@ -18,9 +18,10 @@ import android.widget.Button;
 import android.widget.Toast;
 import yuku.ambilwarna.AmbilWarnaDialog;
 
+import static com.example.paintapp.display.colorList;
 import static com.example.paintapp.display.current_brush;
 import static com.example.paintapp.display.drawPaint;
-//import static com.example.paintapp.display.drawPath;
+import static com.example.paintapp.display.drawPathList;
 import java.util.UUID;
 
 public class MainActivity extends AppCompatActivity {
@@ -64,7 +65,6 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
     }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,7 +91,9 @@ public class MainActivity extends AppCompatActivity {
         eraser.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                drawPath.reset();
+                drawPathList.clear();
+                colorList.clear();
+                path.reset();
             }
         });
 
