@@ -8,10 +8,9 @@ import android.graphics.Paint;
 import android.graphics.Path;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import static com.example.paintapp.MainActivity.path;
+
+import static com.example.paintapp.drawing.path;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
@@ -23,8 +22,10 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
 
     public static ArrayList<Path> drawPathList = new ArrayList<>();
     public static ArrayList<Integer> colorList = new ArrayList<>();
+    public static ArrayList<Integer> sizeBrushList = new ArrayList<>();
     public static Paint drawPaint, canvasPaint;
-    public static int current_brush = Color.BLACK;
+    public static int current_color = Color.BLACK;
+    public static int current_size = 20;
 
     public display(Context context){
         super(context);
@@ -42,13 +43,12 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
     }
 
     private void init(Context context){
-        //drawPath = new Path();
         drawPaint = new Paint();
 
-        drawPaint.setColor(current_brush);
+        drawPaint.setColor(current_color);
 
         drawPaint.setAntiAlias(true);
-        drawPaint.setStrokeWidth(20);
+        drawPaint.setStrokeWidth(current_size);
         drawPaint.setStyle(Paint.Style.STROKE);
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
@@ -72,7 +72,8 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
             case MotionEvent.ACTION_MOVE:
                 path.lineTo(touchX, touchY);
                 drawPathList.add(path);
-                colorList.add(current_brush);
+                colorList.add(current_color);
+                sizeBrushList.add(current_size);
                 break;
             default:
                 return false;
@@ -86,6 +87,7 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
         for(int i = 0; i < drawPathList.size(); i++){
             canvas.drawBitmap(bitmap, 0, 0, canvasPaint);
             drawPaint.setColor(colorList.get(i));
+            drawPaint.setStrokeWidth(sizeBrushList.get(i));
             canvas.drawPath(drawPathList.get(i), drawPaint);
         }
     }
