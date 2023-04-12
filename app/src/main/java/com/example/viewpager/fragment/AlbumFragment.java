@@ -6,18 +6,22 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.viewpager.FolderListAdapter;
 import com.example.viewpager.R;
 import com.example.viewpager.databinding.ActivityMainBinding;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link AlbumFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AlbumFragment extends Fragment  {
+public class AlbumFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,8 +31,10 @@ public class AlbumFragment extends Fragment  {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-    GridView gridView;
+    ListView listView;
     ActivityMainBinding binding;
+    ArrayList<String> arr;
+    FolderListAdapter folderAdapter;
 
     public AlbumFragment() {
         // Required empty public constructor
@@ -59,14 +65,29 @@ public class AlbumFragment extends Fragment  {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+getContext().getFilesDir()
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View albumFragmentView =  inflater.inflate(R.layout.fragment_album, container, false);
-        GridView gridView = (GridView) albumFragmentView.findViewById(R.id.gridView);
+        View albumFragmentView = inflater.inflate(R.layout.fragment_album, container, false);
+        listView = (ListView) albumFragmentView.findViewById(R.id.folderList);
+
+        arr = new ArrayList<>();
+        arr.add("Default");
+        arr.add("New 1");
+        folderAdapter = new FolderListAdapter(getContext(), arr);
+
+        listView.setAdapter(folderAdapter);
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+            }
+        });
         return albumFragmentView;
     }
 
