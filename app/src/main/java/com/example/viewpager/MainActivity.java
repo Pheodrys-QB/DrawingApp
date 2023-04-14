@@ -7,6 +7,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -15,17 +16,24 @@ import android.widget.GridView;
 import com.example.viewpager.databinding.ActivityMainBinding;
 import com.example.viewpager.fragment.MyViewPager2Adapter;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager2 mViewPager2;
     private BottomNavigationView mBottomNavigationView;
+    private FirebaseAuth mAuth;
+    private FirebaseUser mUser;
+    private MainActivity main;
 
     ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
+        mAuth = FirebaseAuth.getInstance();
+        mUser = mAuth.getCurrentUser();
+        main = this;
 
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -67,12 +75,17 @@ public class MainActivity extends AppCompatActivity {
                         mViewPager2.setCurrentItem(1);
                         break;
                     case  R.id.menu_profile:
-                        mViewPager2.setCurrentItem(2);
-                        break;
+                        if(mUser != null){
+                            mViewPager2.setCurrentItem(2);
+                            break;
+                        }
+                        startActivity(new Intent(main, SignIn.class));
+                        finish();
 
                 }
                 return true;
             }
         });
     }
+
 }

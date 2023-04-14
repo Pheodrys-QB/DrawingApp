@@ -32,7 +32,6 @@ public class AlbumFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     ListView listView;
-    ActivityMainBinding binding;
     ArrayList<String> arr;
     FolderListAdapter folderAdapter;
 
@@ -66,7 +65,6 @@ public class AlbumFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-getContext().getFilesDir()
     }
 
     @Override
