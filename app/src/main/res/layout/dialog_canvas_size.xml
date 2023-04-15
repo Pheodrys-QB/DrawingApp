@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title_label"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ENTER SIZE OF NEW PICTURE"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:background="@color/yellow"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/width_label"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_label"
+        android:text="WIDTH"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/width_edit"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/title_label"
+        android:layout_toRightOf="@+id/width_label"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/height_label"
+        android:layout_margin="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/width_label"
+        android:text="HEIGHT"
+        android:textColor="@color/black"
+        android:textStyle="bold"/>
+
+    <EditText
+        android:id="@+id/height_edit"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/width_label"
+        android:layout_toRightOf="@+id/height_label"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/ok_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/height_label"
+        android:text="OK"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/yellow"
+        android:onClick="okSize"/>
+
+    <Button
+        android:id="@+id/cancel_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/height_label"
+        android:layout_toRightOf="@id/ok_size"
+        android:layout_marginLeft="10dp"
+        android:text="Cancel"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/gray"
+        android:onClick="cancelSize"/>
+</RelativeLayout>
