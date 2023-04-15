@@ -11,11 +11,13 @@ import android.view.MotionEvent;
 import android.view.ViewGroup;
 
 import static com.example.paintapp.drawing.path;
+import static com.example.paintapp.dialog_size_image.width;
+import static com.example.paintapp.dialog_size_image.height;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
-public class display extends androidx.appcompat.widget.AppCompatImageView {
+public class display extends androidx.appcompat.widget.AppCompatImageView implements DrawingToDisplay {
     public ViewGroup.LayoutParams params;
     public static Bitmap bitmap;
     public static Canvas mcanvas;
@@ -56,7 +58,7 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
 
         canvasPaint = new Paint(Paint.DITHER_FLAG);
 
-        bitmap = Bitmap.createBitmap(100, 100, Bitmap.Config.ARGB_8888);
+        bitmap = Bitmap.createBitmap(1080, 1080, Bitmap.Config.ARGB_8888);
         mcanvas = new Canvas(bitmap);
         setImageBitmap(bitmap);
     }
@@ -85,10 +87,21 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
     @Override
     protected void onDraw(Canvas canvas) {
         for(int i = 0; i < drawPathList.size(); i++){
-            canvas.drawBitmap(bitmap, 0, 0, canvasPaint);
             drawPaint.setColor(colorList.get(i));
             drawPaint.setStrokeWidth(sizeBrushList.get(i));
-            canvas.drawPath(drawPathList.get(i), drawPaint);
+            mcanvas.drawPath(drawPathList.get(i), drawPaint);
         }
+        canvas.drawBitmap(bitmap, 0, 0, canvasPaint);
+
+    }
+
+    @Override
+    public void onDrawingToDisplay(int width, int height) {
+    }
+
+    private void newCanvas(int width, int height){
+        bitmap = Bitmap.createBitmap(width , height, Bitmap.Config.ARGB_8888);
+        mcanvas = new Canvas(bitmap);
+        setImageBitmap(bitmap);
     }
 }
