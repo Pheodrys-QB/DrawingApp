@@ -1,5 +1,6 @@
 package com.example.viewpager.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,7 +8,9 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.Fragment;
 
+import com.example.viewpager.MainActivity;
 import com.example.viewpager.R;
+import com.google.firebase.auth.FirebaseAuth;
 //import com.google.firebase.auth.FirebaseAuth;
 //import com.google.firebase.auth.FirebaseUser;
 
@@ -23,6 +26,8 @@ public class ProfileFragment extends Fragment {
 
     private String mParam1;
     private String mParam2;
+
+    private FirebaseAuth mAuth;
 
 
     public ProfileFragment() {
@@ -46,14 +51,25 @@ public class ProfileFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        mAuth = FirebaseAuth.getInstance();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        View curView = inflater.inflate(R.layout.fragment_profile, container, false);
+        curView.findViewById(R.id.logoutBtn).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mAuth.signOut();
+                        startActivity(new Intent(getContext(), MainActivity.class));
+                        getActivity().finish();
+                    }
+                }
+        );
 
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        return curView;
     }
 
 }

@@ -33,15 +33,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Username"
+                android:text="Email"
                 android:textSize="20dp"
                 android:width="90dp"/>
 
             <EditText
+                android:id="@+id/rgEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                android:text="username"
+                android:hint="Email"
                 android:textSize="20dp" />
 
         </LinearLayout>
@@ -62,10 +63,11 @@
                 android:width="90dp"/>
 
             <EditText
+                android:id="@+id/rgPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                android:text="*********"
+                android:hint="*********"
                 android:textSize="20dp" />
 
         </LinearLayout>
@@ -83,10 +85,11 @@
                 android:width="90dp"/>
 
             <EditText
+                android:id="@+id/rgConfirmPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                android:text="*********"
+                android:hint="*********"
                 android:textSize="20dp" />
 
         </LinearLayout>
@@ -101,6 +104,7 @@
             android:text="Register" />
 
         <TextView
+            android:id="@+id/rgSwitchScreen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Already has an account?"
