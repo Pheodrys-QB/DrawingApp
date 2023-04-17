@@ -33,7 +33,7 @@
                 android:textSize="20dp" />
 
             <EditText
-                android:id="@+id/lgUsername"
+                android:id="@+id/lgEmail"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
