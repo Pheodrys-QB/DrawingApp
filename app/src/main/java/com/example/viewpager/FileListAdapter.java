@@ -46,10 +46,13 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
 
         File file = filesAndFolders[position];
-        holder.textView.setText(file.getName());
+        String temp = file.getName();
+        holder.textView.setText(temp);
         holder.imageView.setImageResource(R.drawable.ic_launcher_background);
         holder.file = file;
-
+        if(temp.equals("Default")){
+            holder.disable();
+        }
     }
 
     @Override
@@ -64,19 +67,22 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         ImageView imageView;
         File file;
         RecyclerToFolderlistFragment mLisener;
+        View ViewOfItem;
 
         public ViewHolder(View itemView, RecyclerToFolderlistFragment listenr) {
             super(itemView);
             textView = itemView.findViewById(R.id.file_name_text_view);
             imageView = itemView.findViewById(R.id.icon_view);
             mLisener = listenr;
-            itemView.setOnClickListener(new View.OnClickListener() {
+            ViewOfItem = itemView;
+            ViewOfItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     listenr.onRecyclerToFolderlistFragment(file.getName());
                 }
             });
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+
+            ViewOfItem.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {
 
@@ -111,6 +117,10 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                     return true;
                 }
             });
+        }
+
+        public  void disable(){
+            ViewOfItem.setOnLongClickListener(null);
         }
     }
 

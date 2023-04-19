@@ -3,6 +3,7 @@ package com.example.viewpager;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Path;
@@ -26,7 +27,11 @@ import static com.example.viewpager.display.bitmap;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.UUID;
+
 import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class drawing extends Activity {
@@ -44,6 +49,8 @@ public class drawing extends Activity {
 
     boolean isGesture = true;
     boolean isZoom = false;
+    String folder;
+    Intent intent;
 
     private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
         @Override
@@ -69,11 +76,19 @@ public class drawing extends Activity {
             return;
         }
     }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.drawing_view);
 
+        intent = getIntent();
+        String tempStr = intent.getStringExtra("folder");
+        if (tempStr == null) {
+            folder = "Default";
+        } else {
+            folder = tempStr;
+        }
         imgView = (View) findViewById(R.id.drawView);
         pencil = (Button) findViewById(R.id.pencil);
         eraser = (Button) findViewById(R.id.eraser);
@@ -143,6 +158,7 @@ public class drawing extends Activity {
             }
         });
     }
+
     public void currentColor(int c) {
         current_color = c;
         path = new Path();
@@ -176,7 +192,7 @@ public class drawing extends Activity {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN || motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
-                    Bitmap newbitmap = ((BitmapDrawable)t.getDrawable()).getBitmap();
+                    Bitmap newbitmap = ((BitmapDrawable) t.getDrawable()).getBitmap();
                     int pixel = newbitmap.getPixel((int) motionEvent.getX(), (int) motionEvent.getY());
                     int r = Color.red(pixel);
                     int g = Color.green(pixel);
@@ -195,29 +211,52 @@ public class drawing extends Activity {
     private void dowloadImage() {
         AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
         saveDialog.setTitle("Save drawing");
-        saveDialog.setMessage("Save drawing to device Gallery?");
-        saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
-            public void onClick(DialogInterface dialog, int which){
+        saveDialog.setMessage("Save drawing to " + folder + "?");
+        saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
 
-                imgView.setDrawingCacheEnabled(true);
-                String imgSaved = MediaStore.Images.Media.insertImage(
-                        getContentResolver(), imgView.getDrawingCache(),
-                        UUID.randomUUID().toString()+".png", "drawing");
-                if(imgSaved!=null){
-                    Toast savedToast = Toast.makeText(getApplicationContext(),
-                            "Drawing saved to Gallery!", Toast.LENGTH_SHORT);
-                    savedToast.show();
+
+                File saveDir = new File(getFilesDir(), folder);
+                File saveFile = new File(saveDir, UUID.randomUUID().toString() + ".png");
+                FileOutputStream fos = null;
+                try {
+                    fos = new FileOutputStream(saveFile);
+                    // Use the compress method on the BitMap object to write image to the OutputStream
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    try {
+                        fos.close();
+                        Toast savedToast = Toast.makeText(getApplicationContext(),
+                                "Drawing saved to " + folder, Toast.LENGTH_SHORT);
+                        savedToast.show();
+                    } catch (IOException e) {
+                        Toast unsavedToast = Toast.makeText(getApplicationContext(),
+                                "Oops! Image could not be saved.", Toast.LENGTH_SHORT);
+                        unsavedToast.show();
+                        e.printStackTrace();
+                    }
                 }
-                else{
-                    Toast unsavedToast = Toast.makeText(getApplicationContext(),
-                            "Oops! Image could not be saved.", Toast.LENGTH_SHORT);
-                    unsavedToast.show();
-                }
-                imgView.destroyDrawingCache();
+
+//                imgView.setDrawingCacheEnabled(true);
+//                String imgSaved = MediaStore.Images.Media.insertImage(
+//                        getContentResolver(), imgView.getDrawingCache(),
+//                        UUID.randomUUID().toString() + ".png", "drawing");
+//                if (imgSaved != null) {
+//                    Toast savedToast = Toast.makeText(getApplicationContext(),
+//                            "Drawing saved to Gallery!", Toast.LENGTH_SHORT);
+//                    savedToast.show();
+//                } else {
+//                    Toast unsavedToast = Toast.makeText(getApplicationContext(),
+//                            "Oops! Image could not be saved.", Toast.LENGTH_SHORT);
+//                    unsavedToast.show();
+//                }
+//                imgView.destroyDrawingCache();
             }
         });
-        saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
-            public void onClick(DialogInterface dialog, int which){
+        saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
@@ -262,7 +301,8 @@ public class drawing extends Activity {
             });
         }
     }
-    private void openColorPicker(){
+
+    private void openColorPicker() {
         AmbilWarnaDialog color_picker = new AmbilWarnaDialog(this, mDefault, new AmbilWarnaDialog.OnAmbilWarnaListener() {
             @Override
             public void onCancel(AmbilWarnaDialog dialog) {
@@ -276,5 +316,11 @@ public class drawing extends Activity {
             }
         });
         color_picker.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        setResult(Activity.RESULT_OK, intent);
+        finish();
     }
 }

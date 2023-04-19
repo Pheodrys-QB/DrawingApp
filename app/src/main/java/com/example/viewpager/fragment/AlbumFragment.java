@@ -1,13 +1,23 @@
 package com.example.viewpager.fragment;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.fragment.app.Fragment;
 
 import com.example.viewpager.R;
+import com.example.viewpager.drawing;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +34,20 @@ public class AlbumFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private FrameLayout bar;
+    private LinearLayout returnBtn, createBtn;
+    String foldername = "Default";
+    ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        setDetailFragment(foldername);
+                    }
+                }
+            }
+    );
 
     public AlbumFragment() {
         // Required empty public constructor
@@ -62,6 +86,11 @@ public class AlbumFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View albumFragmentView = inflater.inflate(R.layout.fragment_album, container, false);
+        bar = albumFragmentView.findViewById(R.id.returnBar);
+        bar.setVisibility(View.GONE);
+
+        returnBtn = albumFragmentView.findViewById(R.id.returnBtn);
+        createBtn = albumFragmentView.findViewById(R.id.createDraw);
 
         getChildFragmentManager().beginTransaction().replace(R.id.albumHolder, new FileListFragment()).commit();
 
@@ -69,8 +98,30 @@ public class AlbumFragment extends Fragment {
         return albumFragmentView;
     }
 
-    public void setDetailFragment(String folder){
+    public void setDetailFragment(String folder) {
+        foldername = folder;
+        bar.setVisibility(View.VISIBLE);
+        returnBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                getChildFragmentManager().beginTransaction().replace(R.id.albumHolder, new FileListFragment()).commit();
+                returnBtn.setOnClickListener(null);
+                createBtn.setOnClickListener(null);
+                bar.setVisibility(View.GONE);
+            }
+        });
+        createBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getContext(), drawing.class);
+                intent.putExtra("folder", folder);
+                activityLauncher.launch(intent);
+            }
+        });
+        getChildFragmentManager().beginTransaction().replace(R.id.albumHolder, PictureGridFragment.newInstance(folder)).commit();
 
     }
+
 
 }

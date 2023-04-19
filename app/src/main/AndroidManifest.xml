@@ -23,8 +23,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.example.viewpager.SignIn" />
+        <activity android:name=".SignIn" />
         <activity android:name=".drawing"/>
+        <activity android:name=".FullView" />
     </application>
 
 </manifest>

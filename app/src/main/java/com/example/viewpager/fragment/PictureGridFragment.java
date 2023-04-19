@@ -1,47 +1,42 @@
 package com.example.viewpager.fragment;
 
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.viewpager.FileListAdapter;
+import com.example.viewpager.FullView;
+import com.example.viewpager.ImageAdaptor;
 import com.example.viewpager.R;
 
 import java.io.File;
-import java.io.FileFilter;
 
-public class PictureGridFragment extends Fragment{
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+public class PictureGridFragment extends Fragment {
+
+    private String folder;
 
     public PictureGridFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment CommunityFragment.
-     */
+
     // TODO: Rename and change types and number of parameters
-    public static PictureGridFragment newInstance(String param1, String param2) {
+    public static PictureGridFragment newInstance(String folder) {
         PictureGridFragment fragment = new PictureGridFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString("folder", folder);
         fragment.setArguments(args);
         return fragment;
     }
@@ -50,8 +45,7 @@ public class PictureGridFragment extends Fragment{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            folder = getArguments().getString("folder");
         }
 
     }
@@ -60,11 +54,54 @@ public class PictureGridFragment extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View fragmentView = inflater.inflate(R.layout.filelist_fragment, container, false);
+        View fragmentView = inflater.inflate(R.layout.picture_grid_fragment, container, false);
+        File dir = new File(getActivity().getFilesDir(), folder);
+        File[] fileList = dir.listFiles();
 
+        GridView gridView = fragmentView.findViewById(R.id.myGrid);
+        gridView.setAdapter(new ImageAdaptor(fileList, this.getContext()));
+
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                ShowDialog(fileList[position]);
+            }
+        });
 
 
         return fragmentView;
     }
 
+    public void ShowDialog(File item) {
+        final Dialog dialog = new Dialog(this.getContext());
+        dialog.setContentView(R.layout.custom_dialog);
+
+        TextView Image_name = dialog.findViewById(R.id.txt_Image_name);
+        ImageView Image = dialog.findViewById(R.id.img);
+        Button btn_Full = dialog.findViewById(R.id.btn_full);
+        Button btn_Close = dialog.findViewById(R.id.btn_close);
+
+        String title = item.getName();
+
+        Image_name.setText(title);
+        Bitmap myBitmap = BitmapFactory.decodeFile(item.getAbsolutePath());
+        Image.setImageBitmap(myBitmap);
+
+        btn_Close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        btn_Full.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getContext(), FullView.class);
+                i.putExtra("filepath", item.getAbsolutePath());
+                startActivity(i);
+            }
+        });
+        dialog.show();
+    }
 }
