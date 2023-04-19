@@ -37,6 +37,12 @@ public class MainActivity extends AppCompatActivity {
         mUser = mAuth.getCurrentUser();
         main = this;
 
+        File defaultFolder = new File(getFilesDir(), "Default");
+        if(!defaultFolder.exists()){
+            defaultFolder.mkdir();
+        }else if(!defaultFolder.isDirectory()){
+            defaultFolder.mkdir();
+        }
         ActivityCompat.requestPermissions(this,
                 new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_EXTERNAL_STORAGE},
