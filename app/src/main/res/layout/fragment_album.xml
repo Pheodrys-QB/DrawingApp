@@ -3,33 +3,24 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragment.AlbumFragment"
     android:background="@color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".fragment.AlbumFragment">
 
     <!-- TODO: Update blank fragment layout -->
 
-<!--    <GridView-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="10dp"-->
-<!--        android:numColumns="3"-->
-<!--        android:horizontalSpacing="4dp"-->
-<!--        android:verticalSpacing="4dp"-->
-<!--        android:id="@+id/gridView"        />-->
+    <!--    <GridView-->
+    <!--        android:layout_width="wrap_content"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_marginTop="10dp"-->
+    <!--        android:numColumns="3"-->
+    <!--        android:horizontalSpacing="4dp"-->
+    <!--        android:verticalSpacing="4dp"-->
+    <!--        android:id="@+id/gridView"        />-->
 
-    <ListView
-        android:id="@+id/folderList"
+    <FrameLayout
+        android:id="@+id/albumHolder"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="636dp"
-        android:focusable="false" />
-
-    <Button
-        android:id="@+id/storage_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_margin="16dp"
-        android:padding="8dp"
-        android:text="STORAGE" />
+        android:layout_height="match_parent" />
 </LinearLayout>
