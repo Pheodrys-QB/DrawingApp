@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragment.AlbumFragment"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <!-- TODO: Update blank fragment layout -->
+
+<!--    <GridView-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_marginTop="10dp"-->
+<!--        android:numColumns="3"-->
+<!--        android:horizontalSpacing="4dp"-->
+<!--        android:verticalSpacing="4dp"-->
+<!--        android:id="@+id/gridView"        />-->
+
+    <ListView
+        android:id="@+id/folderList"
+        android:layout_width="match_parent"
+        android:layout_height="636dp"
+        android:focusable="false" />
+
+    <Button
+        android:id="@+id/storage_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_margin="16dp"
+        android:padding="8dp"
+        android:text="STORAGE" />
+</LinearLayout>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "811009395551",
+    "project_id": "drawingapp-d4a25",
+    "storage_bucket": "drawingapp-d4a25.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:811009395551:android:436cdf24a03a52387944ea",
+        "android_client_info": {
+          "package_name": "com.example.viewpager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "811009395551-g6cucd37qfgeied23j3vabt7b3r7d2ua.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB2POhovIKmXVGux-Ihm6yOaGk6B_uFP8U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "811009395551-g6cucd37qfgeied23j3vabt7b3r7d2ua.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
