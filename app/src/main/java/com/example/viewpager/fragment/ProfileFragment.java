@@ -36,7 +36,7 @@ public class ProfileFragment extends Fragment {
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private String username = "";
-
+    private TextView mText;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -71,7 +71,7 @@ public class ProfileFragment extends Fragment {
                         DocumentSnapshot document = task.getResult();
                         if (document.exists()) {
                             username = document.get("username").toString();
-
+                            mText.setText(username);
                         }
                     }
                 }
@@ -87,6 +87,7 @@ public class ProfileFragment extends Fragment {
         View curView = inflater.inflate(R.layout.fragment_profile, container, false);
         TextView textView = curView.findViewById(R.id.profileUsername);
         textView.setText(username);
+        mText = textView;
         curView.findViewById(R.id.logoutBtn).setOnClickListener(new View.OnClickListener() {
                                                                     @Override
                                                                     public void onClick(View view) {

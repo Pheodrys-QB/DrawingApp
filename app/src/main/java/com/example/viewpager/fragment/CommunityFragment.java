@@ -1,5 +1,6 @@
 package com.example.viewpager.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.viewpager.R;
+import com.example.viewpager.drawing;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -60,7 +62,15 @@ public class CommunityFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View curView = inflater.inflate(R.layout.fragment_community, container, false);
+        curView.findViewById(R.id.btn_btn).setOnClickListener(new View.OnClickListener() {
+                                                                  @Override
+                                                                  public void onClick(View view) {
+                                                                      startActivity(new Intent(getContext(), drawing.class));
+                                                                  }
+                                                              }
+        );
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_community, container, false);
+        return curView;
     }
 }

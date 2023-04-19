@@ -44,9 +44,9 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         holder.textView.setText(selectedFile.getName());
 
         if(selectedFile.isDirectory()){
-            holder.imageView.setImageResource(R.drawable.ic_baseline_folder_24);
+            holder.imageView.setImageResource(R.drawable.album);
         }else{
-            holder.imageView.setImageResource(R.drawable.ic_baseline_insert_drive_file_24);
+            holder.imageView.setImageResource(R.drawable.album);
         }
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
