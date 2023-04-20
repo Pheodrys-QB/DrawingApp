@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:width="90dp"
-                android:text="Email"
+                android:text="Username"
                 android:textSize="20dp" />
 
             <EditText
@@ -109,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                android:hint="Email"
+                android:hint="Username"
                 android:textSize="20dp" />
 
         </LinearLayout>

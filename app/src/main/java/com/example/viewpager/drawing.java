@@ -118,6 +118,7 @@ public class drawing extends Activity {
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                saveImage();
             }
         });
 
@@ -178,7 +179,7 @@ public class drawing extends Activity {
         });
     }
 
-    private void dowloadImage() {
+    private void saveImage() {
         AlertDialog.Builder saveDialog = new AlertDialog.Builder(this);
         saveDialog.setTitle("Save drawing");
         saveDialog.setMessage("Save drawing to " + folder + "?");
@@ -231,6 +232,37 @@ public class drawing extends Activity {
             }
         });
         saveDialog.show();
+    }
+
+    private void dowloadImage(){
+        AlertDialog.Builder downDialog = new AlertDialog.Builder(this);
+        downDialog.setTitle("Download drawing");
+        downDialog.setMessage("Download drawing to device Gallery?");
+        downDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog, int which){
+                imgView.setDrawingCacheEnabled(true);
+                String imgSaved = MediaStore.Images.Media.insertImage(
+                        getContentResolver(), imgView.getDrawingCache(),
+                        UUID.randomUUID().toString()+".png", "drawing");
+                if(imgSaved!=null){
+                    Toast savedToast = Toast.makeText(getApplicationContext(),
+                            "Drawing downloaded to Gallery!", Toast.LENGTH_SHORT);
+                    savedToast.show();
+                }
+                else{
+                    Toast unsavedToast = Toast.makeText(getApplicationContext(),
+                            "Oops! Image could not be downloaded.", Toast.LENGTH_SHORT);
+                    unsavedToast.show();
+                }
+                imgView.destroyDrawingCache();
+            }
+        });
+        downDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
+            public void onClick(DialogInterface dialog, int which){
+                dialog.cancel();
+            }
+        });
+        downDialog.show();
     }
 
     private void zoomImgage() {
