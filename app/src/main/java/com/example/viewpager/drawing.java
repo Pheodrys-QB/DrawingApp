@@ -22,6 +22,7 @@ import static com.example.viewpager.display.current_color;
 import static com.example.viewpager.display.drawPaint;
 import static com.example.viewpager.display.drawPathList;
 import static com.example.viewpager.display.bitmap;
+import static com.example.viewpager.display.isZoom;
 
 
 import androidx.annotation.NonNull;
@@ -42,40 +43,9 @@ public class drawing extends Activity {
     View imgView, motionLayer;
     float offsetX, offsetY, refX, refY;
     boolean openED = false;
-    ScaleGestureDetector scaleDetector;
-    float scaleFactor = 1.0f;
-    float maxZoom = 5.0f;
-    float minZoom = 0.5f;
-
-    boolean isGesture = true;
-    boolean isZoom = false;
     String folder;
     Intent intent;
 
-    private class ScaleListener extends ScaleGestureDetector.SimpleOnScaleGestureListener {
-        @Override
-        public boolean onScale(ScaleGestureDetector detector) {
-            scaleFactor *= detector.getScaleFactor();
-            scaleFactor = Math.max(minZoom, Math.min(scaleFactor, maxZoom));
-
-            imgView.setScaleX(scaleFactor);
-            imgView.setScaleY(scaleFactor);
-            imgView.invalidate();
-            return true;
-        }
-
-        @Override
-        public boolean onScaleBegin(@NonNull ScaleGestureDetector detector) {
-            isZoom = true;
-            return true;
-        }
-
-        @Override
-        public void onScaleEnd(@NonNull ScaleGestureDetector detector) {
-            isZoom = false;
-            return;
-        }
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -264,42 +234,7 @@ public class drawing extends Activity {
     }
 
     private void zoomImgage() {
-        motionLayer = (View) findViewById(R.id.motionLayer);
-        scaleDetector = new ScaleGestureDetector(motionLayer.getContext(), new ScaleListener());
-        if (isGesture) {
-            isGesture = false;
-            motionLayer.setOnTouchListener(null);
-            motionLayer.setClickable(false);
-
-        } else {
-            isGesture = true;
-            motionLayer.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent motionEvent) {
-                    scaleDetector.onTouchEvent(motionEvent);
-                    switch (motionEvent.getAction()) {
-                        case MotionEvent.ACTION_DOWN:
-                            refX = motionEvent.getX();
-                            refY = motionEvent.getY();
-                            break;
-                        case MotionEvent.ACTION_MOVE:
-                            float nX = motionEvent.getX();
-                            float nY = motionEvent.getY();
-
-                            offsetX += nX - refX;
-                            offsetY += nY - refY;
-
-                            refX = nX;
-                            refY = nY;
-
-                            imgView.setTranslationX(offsetX);
-                            imgView.setTranslationY(offsetY);
-                            imgView.invalidate();
-                    }
-                    return true;
-                }
-            });
-        }
+        isZoom = !isZoom;
     }
 
     private void openColorPicker() {
