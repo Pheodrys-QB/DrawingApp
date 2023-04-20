@@ -23,7 +23,10 @@ import static com.example.viewpager.display.drawPaint;
 import static com.example.viewpager.display.drawPathList;
 import static com.example.viewpager.display.bitmap;
 import static com.example.viewpager.display.isZoom;
-
+import static com.example.viewpager.display.mPosX;
+import static com.example.viewpager.display.mPosY;
+import static com.example.viewpager.display.scaleFactor;
+import static com.example.viewpager.display.displayScreen;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -132,7 +135,7 @@ public class drawing extends Activity {
 
     public void currentColor(int c) {
         current_color = c;
-        path = new Path();
+//        path = new Path();
     }
 
     private void new_Paint() {
@@ -163,8 +166,12 @@ public class drawing extends Activity {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN || motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
-                    Bitmap newbitmap = ((BitmapDrawable) t.getDrawable()).getBitmap();
-                    int pixel = newbitmap.getPixel((int) motionEvent.getX(), (int) motionEvent.getY());
+//                    Bitmap newbitmap = ((BitmapDrawable) t.getDrawable()).getBitmap();
+                    float touchX = ((float)motionEvent.getX() / scaleFactor) - mPosX;
+                    float touchY = ( (float)motionEvent.getY() / scaleFactor) - mPosY;
+
+
+                    int pixel = bitmap.getPixel((int) touchX, (int) touchY);
                     int r = Color.red(pixel);
                     int g = Color.green(pixel);
                     int b = Color.blue(pixel);
@@ -288,6 +295,9 @@ public class drawing extends Activity {
     @Override
     public void onBackPressed() {
         setResult(Activity.RESULT_OK, intent);
+        scaleFactor = 1.0f;
+        mPosX=0;
+        mPosY = 0;
         finish();
     }
 }

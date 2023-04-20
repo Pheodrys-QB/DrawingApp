@@ -76,14 +76,12 @@ public class PictureGridFragment extends Fragment {
         final Dialog dialog = new Dialog(this.getContext());
         dialog.setContentView(R.layout.custom_dialog);
 
-        TextView Image_name = dialog.findViewById(R.id.txt_Image_name);
         ImageView Image = dialog.findViewById(R.id.img);
         Button btn_Full = dialog.findViewById(R.id.btn_full);
         Button btn_Close = dialog.findViewById(R.id.btn_close);
 
         String title = item.getName();
 
-        Image_name.setText(title);
         Bitmap myBitmap = BitmapFactory.decodeFile(item.getAbsolutePath());
         Image.setImageBitmap(myBitmap);
 

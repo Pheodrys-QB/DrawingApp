@@ -32,13 +32,13 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
     public static int current_size = 20;
 
     ScaleGestureDetector scaleDetector;
-    float scaleFactor = 1.0f;
+    public static float scaleFactor = 1.0f;
     float maxZoom = 5.0f;
     float minZoom = 0.5f;
     private static final int INVALID_POINTER_ID = -1;
 
-    private float mPosX = 0;
-    private float mPosY = 0;
+    public static float mPosX = 0;
+    public static float mPosY = 0;
 
     private float mLastTouchX;
     private float mLastTouchY;
@@ -47,6 +47,8 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
     private int mActivePointerId = INVALID_POINTER_ID;
 
     public static boolean isZoom = false;
+    public static Context displayScreen;
+
     private float mX, mY;
     private static final float TOUCH_TOLERANCE = 4;
 
@@ -78,6 +80,7 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
     public display(Context context, @Nullable AttributeSet atts, int defStyleAttr) {
         super(context, atts, defStyleAttr);
         scaleDetector = new ScaleGestureDetector(context, new ScaleListener());
+
         init(context);
     }
 
@@ -103,11 +106,12 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        float touchX = ((float)event.getX() / scaleFactor) - mPosX;
-        float touchY = ( (float)event.getY() / scaleFactor) - mPosY;
+
+        float touchX = ((float) event.getX() / scaleFactor) - mPosX;
+        float touchY = ((float) event.getY() / scaleFactor) - mPosY;
 
         int action = event.getAction();
-        if(isZoom){
+        if (isZoom) {
             scaleDetector.onTouchEvent(event);
 
             switch (action & MotionEvent.ACTION_MASK) {
@@ -198,7 +202,7 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
             }
 
             return true;
-        }else {
+        } else {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_DOWN:
                     path.moveTo(touchX, touchY);
@@ -212,10 +216,11 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
                         path.quadTo(mX, mY, (touchX + mX) / 2, (touchY + mY) / 2);
                         mX = touchX;
                         mY = touchY;
-                    }                    break;
+                    }
+                    break;
                 case MotionEvent.ACTION_UP:
                     path.lineTo(mX, mY);
-                    mcanvas.drawPath(path, drawPaint);
+//                    mcanvas.drawPath(path, drawPaint);
                     path.reset();
                     break;
                 default:
@@ -230,7 +235,7 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
     protected void onDraw(Canvas canvas) {
         canvas.save();
 
-        canvas.scale(scaleFactor,scaleFactor);
+        canvas.scale(scaleFactor, scaleFactor);
         canvas.translate(mPosX, mPosY);
 
         mcanvas.drawPath(path, drawPaint);

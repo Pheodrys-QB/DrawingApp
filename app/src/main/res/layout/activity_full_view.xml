@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/black"
     tools:context=".FullView">
 
     <ImageView
@@ -11,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:src="@mipmap/ic_launcher_round"
-        android:scaleType="fitXY"
-        />
+        android:scaleType="fitCenter"/>
 
 </RelativeLayout>
