@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Path;
 import android.graphics.drawable.BitmapDrawable;
@@ -26,7 +27,7 @@ import static com.example.viewpager.display.isZoom;
 import static com.example.viewpager.display.mPosX;
 import static com.example.viewpager.display.mPosY;
 import static com.example.viewpager.display.scaleFactor;
-import static com.example.viewpager.display.displayScreen;
+import static com.example.viewpager.display.mcanvas;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -131,6 +132,10 @@ public class drawing extends Activity {
                 dowloadImage();
             }
         });
+        bitmap = Bitmap.createBitmap(1080, 1080, Bitmap.Config.ARGB_8888);
+        mcanvas = new Canvas(bitmap);
+        bitmap.eraseColor(Color.BLACK);
+
     }
 
     public void currentColor(int c) {
@@ -184,6 +189,8 @@ public class drawing extends Activity {
                 return true;
             }
         });
+
+
     }
 
     private void saveImage() {
@@ -295,9 +302,6 @@ public class drawing extends Activity {
     @Override
     public void onBackPressed() {
         setResult(Activity.RESULT_OK, intent);
-        scaleFactor = 1.0f;
-        mPosX=0;
-        mPosY = 0;
         finish();
     }
 }

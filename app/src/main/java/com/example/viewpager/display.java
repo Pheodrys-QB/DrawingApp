@@ -101,7 +101,9 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
         bitmap = Bitmap.createBitmap(1080, 1080, Bitmap.Config.ARGB_8888);
         mcanvas = new Canvas(bitmap);
         bitmap.eraseColor(Color.WHITE);
-        setImageBitmap(bitmap);
+        scaleFactor = 1.0f;
+        mPosX = 0;
+        mPosY = 0;
     }
 
     @Override
