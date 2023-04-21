@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tile_dialog_brush_size"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textSize="20dp"
+        android:text="BRUSH SIZE"
+        android:textStyle="bold"
+        android:background="@color/yellow"
+        android:textColor="@color/black" />
+
+    <SeekBar
+        android:id="@+id/brush_size"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tile_dialog_brush_size"/>
+
+    <TextView
+        android:id="@+id/show_brush_size"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/brush_size"
+        android:textColor="@color/black"/>
+
+    <Button
+        android:id="@+id/ok_brush_size"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/show_brush_size"
+        android:text="Change size"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/yellow" />
+
+    <Button
+        android:id="@+id/cancel_brush_size"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/show_brush_size"
+        android:layout_toRightOf="@id/ok_brush_size"
+        android:layout_marginLeft="10dp"
+        android:text="Cancel"
+        android:textColor="@color/black"
+        android:backgroundTint="@color/gray"/>
+</RelativeLayout>
