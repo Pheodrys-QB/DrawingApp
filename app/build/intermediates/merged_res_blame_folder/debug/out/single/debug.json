@@ -1,0 +1,206 @@
+[
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\color_custom_bottom_navigation.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\color\\custom_bottom_navigation.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable_tools_design.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable\\tools_design.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable_eraser.png.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable\\eraser.png"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\mipmap-xhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\mipmap-xhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\mipmap-mdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\mipmap-mdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable_logo.png.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable\\logo.png"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\layout_list_item.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\list_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\mipmap-hdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\mipmap-hdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\layout_fragment_album.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\fragment_album.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\layout_picture_grid_fragment.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\picture_grid_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable_ic_launcher_background.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable\\ic_launcher_background.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\mipmap-anydpi-v26_ic_launcher_round.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\mipmap-anydpi-v26\\ic_launcher_round.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\layout_activity_full_view.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\activity_full_view.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\layout_recycler_item.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\recycler_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable_pencil.png.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable\\pencil.png"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable_eyedropper.png.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable\\eyedropper.png"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable_colorpicker.png.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable\\colorpicker.png"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\layout_filelist_fragment.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\filelist_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\mipmap-xxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\mipmap-xxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\layout_custom_dialog.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\custom_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\layout_drawing_view.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\drawing_view.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\mipmap-hdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\mipmap-hdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\layout_grid_item.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\grid_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable_profile.png.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable\\profile.png"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\mipmap-xxxhdpi_ic_launcher.webp.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\mipmap-xxxhdpi\\ic_launcher.webp"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable_baseline_arrow_left_24.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable\\baseline_arrow_left_24.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable_community.png.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable\\community.png"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\layout_dialog_brush_size.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\dialog_brush_size.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\layout_fragment_register.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\fragment_register.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable_zoom.png.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable\\zoom.png"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable_button_design.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable\\button_design.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\mipmap-xhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\mipmap-xhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\mipmap-anydpi-v26_ic_launcher.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\mipmap-anydpi-v26\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable-v24_ic_launcher_foreground.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable-v24\\ic_launcher_foreground.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\layout_fragment_login.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\fragment_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\layout_view_display.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\view_display.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\mipmap-anydpi-v33_ic_launcher.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\mipmap-anydpi-v33\\ic_launcher.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable_newpaper.png.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable\\newpaper.png"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\layout_fragment_community.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\fragment_community.xml"
+    },
+    {
+        "merged": "com.example.viewpager.app-merged_res-35:/layout_view_display.xml.flat",
+        "source": "com.example.viewpager.app-main-37:/layout/view_display.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\layout_fragment_profile.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\fragment_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\xml_backup_rules.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\xml\\backup_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\xml_data_extraction_rules.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\xml\\data_extraction_rules.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\mipmap-xxxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\mipmap-xxxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\mipmap-mdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\mipmap-mdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable_dowload.png.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable\\dowload.png"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable_save_img.png.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable\\save_img.png"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\mipmap-xxhdpi_ic_launcher_round.webp.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\mipmap-xxhdpi\\ic_launcher_round.webp"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\menu_menu_bottom_navigation.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\menu\\menu_bottom_navigation.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-merged_res-35:\\drawable_album.png.flat",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\drawable\\album.png"
+    }
+]

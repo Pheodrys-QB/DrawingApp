@@ -1,0 +1,70 @@
+[
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-mergeDebugResources-34:\\layout\\fragment_login.xml",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\fragment_login.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-mergeDebugResources-34:\\layout\\fragment_album.xml",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\fragment_album.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-mergeDebugResources-34:\\layout\\list_item.xml",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\list_item.xml"
+    },
+    {
+        "merged": "com.example.viewpager.app-mergeDebugResources-34:/layout/view_display.xml",
+        "source": "com.example.viewpager.app-main-37:/layout/view_display.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-mergeDebugResources-34:\\layout\\fragment_profile.xml",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\fragment_profile.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-mergeDebugResources-34:\\layout\\fragment_community.xml",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\fragment_community.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-mergeDebugResources-34:\\layout\\custom_dialog.xml",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\custom_dialog.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-mergeDebugResources-34:\\layout\\picture_grid_fragment.xml",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\picture_grid_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-mergeDebugResources-34:\\layout\\view_display.xml",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\view_display.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-mergeDebugResources-34:\\layout\\recycler_item.xml",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\recycler_item.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-mergeDebugResources-34:\\layout\\fragment_register.xml",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\fragment_register.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-mergeDebugResources-34:\\layout\\activity_full_view.xml",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\activity_full_view.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-mergeDebugResources-34:\\layout\\filelist_fragment.xml",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\filelist_fragment.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-mergeDebugResources-34:\\layout\\activity_main.xml",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-mergeDebugResources-34:\\layout\\dialog_brush_size.xml",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\dialog_brush_size.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-mergeDebugResources-34:\\layout\\drawing_view.xml",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\drawing_view.xml"
+    },
+    {
+        "merged": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-mergeDebugResources-34:\\layout\\grid_item.xml",
+        "source": "C:\\Users\\DELL\\.gradle\\daemon\\7.5\\com.example.viewpager.app-main-37:\\layout\\grid_item.xml"
+    }
+]

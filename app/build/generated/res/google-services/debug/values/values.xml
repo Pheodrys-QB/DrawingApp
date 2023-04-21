@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="default_web_client_id" translatable="false">811009395551-g6cucd37qfgeied23j3vabt7b3r7d2ua.apps.googleusercontent.com</string>
+    <string name="gcm_defaultSenderId" translatable="false">811009395551</string>
+    <string name="google_api_key" translatable="false">AIzaSyB2POhovIKmXVGux-Ihm6yOaGk6B_uFP8U</string>
+    <string name="google_app_id" translatable="false">1:811009395551:android:436cdf24a03a52387944ea</string>
+    <string name="google_crash_reporting_api_key" translatable="false">AIzaSyB2POhovIKmXVGux-Ihm6yOaGk6B_uFP8U</string>
+    <string name="google_storage_bucket" translatable="false">drawingapp-d4a25.appspot.com</string>
+    <string name="project_id" translatable="false">drawingapp-d4a25</string>
+</resources>
