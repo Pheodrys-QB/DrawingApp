@@ -2,19 +2,21 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@drawable/wallpaper_blue">
 
 
     <ImageView android:layout_height="wrap_content"
         android:layout_width="wrap_content"
         android:src="@drawable/logo"
+        android:layout_marginTop="50dp"
         />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_marginTop="-60dp"
+        android:layout_marginTop="-20dp"
         android:paddingHorizontal="30dp"
         android:paddingBottom="5dp">
 
@@ -27,8 +29,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/comfortaa"
                 android:text="Username"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/lgEmail"
@@ -36,7 +40,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
                 android:hint="Email"
-                android:textSize="20dp" />
+                android:textSize="20sp" />
 
         </LinearLayout>
 
@@ -46,26 +50,28 @@
             android:orientation="horizontal">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="109dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:fontFamily="@font/comfortaa"
                 android:text="Password"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/lgPassword"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="10"
-                android:inputType="textPassword"
                 android:hint="*********"
-                android:textSize="20dp" />
+                android:inputType="textPassword"
+                android:textSize="20sp" />
 
         </LinearLayout>
 
         <Button
             android:id="@+id/loginBtn"
-            android:layout_width="wrap_content"
+            android:layout_width="351dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginVertical="20dp"
@@ -79,7 +85,9 @@
             android:text="Register new account"
             android:textAlignment="center"
             android:textSize="15sp"
-            android:textColor="@color/blue"/>
+            android:textColor="@color/blue"
+            android:fontFamily="@font/comfortaa"
+            android:textStyle="bold" />
     </LinearLayout>
 </LinearLayout>
 

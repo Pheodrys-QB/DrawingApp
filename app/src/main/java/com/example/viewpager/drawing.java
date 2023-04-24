@@ -8,11 +8,9 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Path;
-import android.graphics.drawable.BitmapDrawable;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -29,7 +27,6 @@ import static com.example.viewpager.display.mPosY;
 import static com.example.viewpager.display.scaleFactor;
 import static com.example.viewpager.display.mcanvas;
 
-import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 
 import java.io.File;
@@ -108,7 +105,7 @@ public class drawing extends Activity {
         zoomImg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                zoomImgage();
+                zoomImage();
             }
         });
 
@@ -279,7 +276,7 @@ public class drawing extends Activity {
         downDialog.show();
     }
 
-    private void zoomImgage() {
+    private void zoomImage() {
         isZoom = !isZoom;
     }
 

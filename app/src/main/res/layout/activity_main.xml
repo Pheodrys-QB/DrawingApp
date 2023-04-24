@@ -8,23 +8,6 @@
     tools:context=".MainActivity">
 
 
-<!--    <RelativeLayout-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="0dp"-->
-<!--        android:layout_weight="0.8"-->
-<!--        android:background="@color/design_default_color_primary">-->
-
-<!--        <TextView-->
-<!--            android:id="@+id/textView"-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_centerInParent="true"-->
-<!--            android:text="Cố định"-->
-<!--            android:textColor="#F8F8F8"-->
-<!--            android:textSize="20sp"-->
-<!--            android:textStyle="italic" />-->
-<!--    </RelativeLayout>-->
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
