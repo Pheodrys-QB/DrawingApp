@@ -1,16 +1,32 @@
 package com.example.viewpager.fragment;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AbsListView;
+import android.widget.AdapterView;
+import android.widget.GridView;
 
+import com.example.viewpager.FullView;
+import com.example.viewpager.OnlineFullView;
+import com.example.viewpager.OnlineImageAdaptor;
 import com.example.viewpager.R;
 import com.example.viewpager.drawing;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -27,6 +43,17 @@ public class CommunityFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+
+    private OnlineImageAdaptor adaptor;
+    private FirebaseStorage storage;
+    private FirebaseFirestore db;
+    private DocumentReference beginDoc;
+    private int totalAmount;
+    private int addLimit = 30;
+    private boolean isLoading;
+    private int THRESHOLD = 3;
+    private int mode = 0;
 
     public CommunityFragment() {
         // Required empty public constructor
@@ -63,6 +90,69 @@ public class CommunityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View curView = inflater.inflate(R.layout.fragment_community, container, false);
+        storage = FirebaseStorage.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        SwipeRefreshLayout refreshLayout = curView.findViewById(R.id.refresh_layer);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                if (!isLoading) {
+                    isLoading = true;
+                    adaptor.reset();
+
+                    // fetch data
+                    // update beginDoc
+                    // update totalAmount
+                    // update isLoading
+                }
+            }
+        });
+
+
+        adaptor = new OnlineImageAdaptor(this.getContext());
+        GridView gridView = curView.findViewById(R.id.imageGrid);
+
+        isLoading = true;
+        //get image from db
+        // update beginDoc
+        // update totalAmount
+        // update isLoading
+
+        gridView.setAdapter(adaptor);
+        adaptor.notifyDataSetChanged();
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
+                Intent i = new Intent(getContext(), OnlineFullView.class);
+
+                String imgId = adaptor.getID(position);
+
+                i.putExtra("imageID", imgId);
+
+                startActivity(i);
+            }
+        });
+        gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(AbsListView absListView, int i) {
+            }
+
+            @Override
+            public void onScroll(AbsListView absListView, int firstVisibleItem, int visibleItemCount, int totalItemCount) {
+                final int lastItem = firstVisibleItem + visibleItemCount;
+                if (totalAmount - lastItem >= THRESHOLD) {
+                    if (!isLoading) {
+                        isLoading = true;
+                        // here you have reached end of list, load more data into adaptor
+                        // update beginDoc
+                        // update totalAmount
+                        // update isLoading
+                    }
+                }
+            }
+        });
+
 
         // Inflate the layout for this fragment
         return curView;

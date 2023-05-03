@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -100,6 +101,7 @@ public class SignIn extends AppCompatActivity {
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
+                            Toast.makeText(getApplicationContext(),"Password must be at least 6 characters", Toast.LENGTH_LONG).show();
                         }
                     }
                 });

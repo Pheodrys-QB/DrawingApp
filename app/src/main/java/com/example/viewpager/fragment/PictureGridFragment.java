@@ -14,6 +14,7 @@ import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.activity.result.ActivityResultLauncher;
 import androidx.fragment.app.Fragment;
 
 import com.example.viewpager.FullView;
@@ -26,6 +27,7 @@ import java.io.File;
 public class PictureGridFragment extends Fragment {
 
     private String folder;
+    private ActivityResultLauncher<Intent> laucher;
 
     public PictureGridFragment() {
         // Required empty public constructor
@@ -33,9 +35,10 @@ public class PictureGridFragment extends Fragment {
 
 
     // TODO: Rename and change types and number of parameters
-    public static PictureGridFragment newInstance(String folder) {
+    public static PictureGridFragment newInstance(String folder,  ActivityResultLauncher<Intent> activityLauncher) {
         PictureGridFragment fragment = new PictureGridFragment();
         Bundle args = new Bundle();
+        fragment.laucher = activityLauncher;
         args.putString("folder", folder);
         fragment.setArguments(args);
         return fragment;
@@ -97,7 +100,8 @@ public class PictureGridFragment extends Fragment {
             public void onClick(View v) {
                 Intent i = new Intent(getContext(), FullView.class);
                 i.putExtra("filepath", item.getAbsolutePath());
-                startActivity(i);
+                dialog.dismiss();
+                laucher.launch(i);
             }
         });
         dialog.show();

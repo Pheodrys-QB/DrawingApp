@@ -1,6 +1,8 @@
 package com.example.viewpager;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Environment;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
@@ -88,7 +91,6 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
 
                     PopupMenu popupMenu = new PopupMenu(context, v);
                     popupMenu.getMenu().add("DELETE");
-                    popupMenu.getMenu().add("MOVE");
                     popupMenu.getMenu().add("RENAME");
 
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
@@ -101,12 +103,38 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                                     v.setVisibility(View.GONE);
                                 }
                             }
-                            if (item.getTitle().equals("MOVE")) {
-                                Toast.makeText(context.getApplicationContext(), "MOVED ", Toast.LENGTH_SHORT).show();
-
-                            }
                             if (item.getTitle().equals("RENAME")) {
                                 Toast.makeText(context.getApplicationContext(), "RENAME ", Toast.LENGTH_SHORT).show();
+                                AlertDialog.Builder dialog = new AlertDialog.Builder(context);
+                                dialog.setTitle("Rename album");
+                                final EditText myInput = new EditText(context);
+                                dialog.setView(myInput);
+
+                                dialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        String temp = myInput.getText().toString();
+                                        if (!temp.equals("")) {
+                                            File newDir = new File(context.getFilesDir(), temp);
+                                            if (newDir.exists() && newDir.isDirectory()) {
+                                                Toast.makeText(context, "Name already taken", Toast.LENGTH_LONG).show();
+                                            }else{
+                                                file.renameTo(newDir);
+                                                textView.setText(file.getName());
+                                            }
+
+                                        }
+                                    }
+                                });
+
+                                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialogInterface, int i) {
+                                        dialogInterface.cancel();
+                                    }
+                                });
+                                dialog.show();
+
 
                             }
                             return true;

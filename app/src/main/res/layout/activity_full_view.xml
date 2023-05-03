@@ -7,11 +7,73 @@
     android:background="@color/black"
     tools:context=".FullView">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:gravity="center_vertical | end"
+        android:paddingEnd="20dp">
+<ImageView
+    android:id="@+id/trashcan"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/trashcan"
+    android:scaleY="2"
+    android:scaleX="2"/>
+
+
+    </LinearLayout>
+
     <ImageView
         android:id="@+id/img_full"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/ic_launcher_round"
-        android:scaleType="fitCenter"/>
+        android:scaleType="fitCenter"
+        android:src="@mipmap/ic_launcher_round" />
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:paddingHorizontal="20dp"
+        >
+
+<ImageView
+    android:id="@+id/upload"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/upload"
+    android:scaleX="2"
+    android:scaleY="2"
+    android:layout_alignParentLeft="true"
+    android:layout_centerVertical="true"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:id="@+id/download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/download"
+                android:scaleX="2"
+                android:scaleY="2"/>
+            <ImageView
+                android:id="@+id/edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/edit"
+                android:scaleX="2"
+                android:scaleY="2"
+                android:layout_marginLeft="15dp"/>
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
 </RelativeLayout>

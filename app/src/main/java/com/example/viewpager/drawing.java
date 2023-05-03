@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Path;
@@ -47,6 +48,8 @@ public class drawing extends Activity {
     String folder;
     Intent intent;
 
+    private boolean enableReplace;
+    private String filepath;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +63,15 @@ public class drawing extends Activity {
         } else {
             folder = tempStr;
         }
+
+        enableReplace = false;
+        String tempfilepath = intent.getStringExtra("filepath");
+        if (tempfilepath != null && !tempfilepath.equals("")) {
+            filepath = tempfilepath;
+            enableReplace = true;
+        }
+
+
         imgView = (View) findViewById(R.id.drawView);
         pencil = (Button) findViewById(R.id.pencil);
         eraser = (Button) findViewById(R.id.eraser);
@@ -129,9 +141,15 @@ public class drawing extends Activity {
                 dowloadImage();
             }
         });
-        bitmap = Bitmap.createBitmap(1080, 1080, Bitmap.Config.ARGB_8888);
-        mcanvas = new Canvas(bitmap);
-        bitmap.eraseColor(Color.BLACK);
+
+        if(enableReplace){
+            File file = new File(filepath);
+            bitmap = BitmapFactory.decodeFile(file.getAbsolutePath()).copy(Bitmap.Config.ARGB_8888, true);
+            mcanvas = new Canvas(bitmap);
+        }
+//        bitmap = Bitmap.createBitmap(1080, 1080, Bitmap.Config.ARGB_8888);
+//        mcanvas = new Canvas(bitmap);
+//        bitmap.eraseColor(Color.BLACK);
 
     }
 
@@ -169,8 +187,8 @@ public class drawing extends Activity {
             public boolean onTouch(View view, MotionEvent motionEvent) {
                 if (motionEvent.getAction() == MotionEvent.ACTION_DOWN || motionEvent.getAction() == MotionEvent.ACTION_MOVE) {
 //                    Bitmap newbitmap = ((BitmapDrawable) t.getDrawable()).getBitmap();
-                    float touchX = ((float)motionEvent.getX() / scaleFactor) - mPosX;
-                    float touchY = ( (float)motionEvent.getY() / scaleFactor) - mPosY;
+                    float touchX = ((float) motionEvent.getX() / scaleFactor) - mPosX;
+                    float touchY = ((float) motionEvent.getY() / scaleFactor) - mPosY;
 
 
                     int pixel = bitmap.getPixel((int) touchX, (int) touchY);
@@ -197,44 +215,55 @@ public class drawing extends Activity {
         saveDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
 
-
-                File saveDir = new File(getFilesDir(), folder);
-                File saveFile = new File(saveDir, UUID.randomUUID().toString() + ".png");
-                FileOutputStream fos = null;
-                try {
-                    fos = new FileOutputStream(saveFile);
-                    // Use the compress method on the BitMap object to write image to the OutputStream
-                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
+                if (enableReplace) {
+                    File saveFile = new File(filepath);
+                    FileOutputStream fos = null;
                     try {
-                        fos.close();
-                        Toast savedToast = Toast.makeText(getApplicationContext(),
-                                "Drawing saved to " + folder, Toast.LENGTH_SHORT);
-                        savedToast.show();
-                    } catch (IOException e) {
-                        Toast unsavedToast = Toast.makeText(getApplicationContext(),
-                                "Oops! Image could not be saved.", Toast.LENGTH_SHORT);
-                        unsavedToast.show();
+                        fos = new FileOutputStream(saveFile, false);
+                        // Use the compress method on the BitMap object to write image to the OutputStream
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                    } catch (Exception e) {
                         e.printStackTrace();
+                    } finally {
+                        try {
+                            fos.close();
+                            Toast savedToast = Toast.makeText(getApplicationContext(),
+                                    "Drawing saved", Toast.LENGTH_SHORT);
+                            savedToast.show();
+                        } catch (IOException e) {
+                            Toast unsavedToast = Toast.makeText(getApplicationContext(),
+                                    "Oops! Image could not be saved.", Toast.LENGTH_SHORT);
+                            unsavedToast.show();
+                            e.printStackTrace();
+                        }
                     }
+                } else {
+                    File saveDir = new File(getFilesDir(), folder);
+                    File saveFile = new File(saveDir, UUID.randomUUID().toString() + ".png");
+                    FileOutputStream fos = null;
+                    try {
+                        fos = new FileOutputStream(saveFile);
+                        // Use the compress method on the BitMap object to write image to the OutputStream
+                        bitmap.compress(Bitmap.CompressFormat.PNG, 100, fos);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    } finally {
+                        try {
+                            fos.close();
+                            Toast savedToast = Toast.makeText(getApplicationContext(),
+                                    "Drawing saved to " + folder, Toast.LENGTH_SHORT);
+                            savedToast.show();
+                        } catch (IOException e) {
+                            Toast unsavedToast = Toast.makeText(getApplicationContext(),
+                                    "Oops! Image could not be saved.", Toast.LENGTH_SHORT);
+                            unsavedToast.show();
+                            e.printStackTrace();
+                        }
+                    }
+
+
                 }
 
-//                imgView.setDrawingCacheEnabled(true);
-//                String imgSaved = MediaStore.Images.Media.insertImage(
-//                        getContentResolver(), imgView.getDrawingCache(),
-//                        UUID.randomUUID().toString() + ".png", "drawing");
-//                if (imgSaved != null) {
-//                    Toast savedToast = Toast.makeText(getApplicationContext(),
-//                            "Drawing saved to Gallery!", Toast.LENGTH_SHORT);
-//                    savedToast.show();
-//                } else {
-//                    Toast unsavedToast = Toast.makeText(getApplicationContext(),
-//                            "Oops! Image could not be saved.", Toast.LENGTH_SHORT);
-//                    unsavedToast.show();
-//                }
-//                imgView.destroyDrawingCache();
             }
         });
         saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -245,22 +274,21 @@ public class drawing extends Activity {
         saveDialog.show();
     }
 
-    private void dowloadImage(){
+    private void dowloadImage() {
         AlertDialog.Builder downDialog = new AlertDialog.Builder(this);
         downDialog.setTitle("Download drawing");
         downDialog.setMessage("Download drawing to device Gallery?");
-        downDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener(){
-            public void onClick(DialogInterface dialog, int which){
+        downDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
                 imgView.setDrawingCacheEnabled(true);
                 String imgSaved = MediaStore.Images.Media.insertImage(
                         getContentResolver(), imgView.getDrawingCache(),
-                        UUID.randomUUID().toString()+".png", "drawing");
-                if(imgSaved!=null){
+                        UUID.randomUUID().toString() + ".png", "drawing");
+                if (imgSaved != null) {
                     Toast savedToast = Toast.makeText(getApplicationContext(),
                             "Drawing downloaded to Gallery!", Toast.LENGTH_SHORT);
                     savedToast.show();
-                }
-                else{
+                } else {
                     Toast unsavedToast = Toast.makeText(getApplicationContext(),
                             "Oops! Image could not be downloaded.", Toast.LENGTH_SHORT);
                     unsavedToast.show();
@@ -268,8 +296,8 @@ public class drawing extends Activity {
                 imgView.destroyDrawingCache();
             }
         });
-        downDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
-            public void onClick(DialogInterface dialog, int which){
+        downDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int which) {
                 dialog.cancel();
             }
         });
@@ -298,6 +326,7 @@ public class drawing extends Activity {
 
     @Override
     public void onBackPressed() {
+        intent.putExtra("filepath", "");
         setResult(Activity.RESULT_OK, intent);
         finish();
     }

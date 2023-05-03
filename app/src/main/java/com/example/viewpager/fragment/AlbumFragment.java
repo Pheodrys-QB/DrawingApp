@@ -1,14 +1,18 @@
 package com.example.viewpager.fragment;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
@@ -18,6 +22,8 @@ import androidx.fragment.app.Fragment;
 
 import com.example.viewpager.R;
 import com.example.viewpager.drawing;
+
+import java.io.File;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -35,7 +41,6 @@ public class AlbumFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private FrameLayout bar;
     private LinearLayout returnBtn, createBtn;
     String foldername = "Default";
     ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
@@ -43,7 +48,16 @@ public class AlbumFragment extends Fragment {
                 @Override
                 public void onActivityResult(ActivityResult result) {
                     if (result.getResultCode() == Activity.RESULT_OK) {
-                        setDetailFragment(foldername);
+                        String fileEdit = result.getData().getExtras().getString("filepath");
+                        if(fileEdit != null && !fileEdit.equals("")){
+                            Intent drawIntent = new Intent(getContext() ,drawing.class);
+                            drawIntent.putExtra("folder", foldername);
+                            drawIntent.putExtra("filepath", fileEdit);
+                            activityLauncher.launch(drawIntent);
+                        }else{
+                            setDetailFragment(foldername);
+                        }
+
                     }
                 }
             }
@@ -86,11 +100,45 @@ public class AlbumFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View albumFragmentView = inflater.inflate(R.layout.fragment_album, container, false);
-        bar = albumFragmentView.findViewById(R.id.returnBar);
-        bar.setVisibility(View.GONE);
 
         returnBtn = albumFragmentView.findViewById(R.id.returnBtn);
         createBtn = albumFragmentView.findViewById(R.id.createDraw);
+        returnBtn.setVisibility(View.GONE);
+        createBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                dialog.setTitle("New album");
+                final EditText myInput = new EditText(getContext());
+                dialog.setView(myInput);
+
+                dialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        String temp = myInput.getText().toString();
+                        if (!temp.equals("")) {
+                            File newDir = new File(getActivity().getFilesDir(), temp);
+                            if (newDir.exists() && newDir.isDirectory()) {
+                                Toast.makeText(getContext(), "Album already exist", Toast.LENGTH_LONG).show();
+                            } else {
+                                newDir.mkdir();
+                                getChildFragmentManager().beginTransaction().replace(R.id.albumHolder, new FileListFragment()).commit();
+                            }
+                        }
+                    }
+                });
+
+                dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                dialog.show();
+
+
+            }
+        });
 
         getChildFragmentManager().beginTransaction().replace(R.id.albumHolder, new FileListFragment()).commit();
 
@@ -100,15 +148,50 @@ public class AlbumFragment extends Fragment {
 
     public void setDetailFragment(String folder) {
         foldername = folder;
-        bar.setVisibility(View.VISIBLE);
+        returnBtn.setVisibility(View.VISIBLE);
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 getChildFragmentManager().beginTransaction().replace(R.id.albumHolder, new FileListFragment()).commit();
                 returnBtn.setOnClickListener(null);
-                createBtn.setOnClickListener(null);
-                bar.setVisibility(View.GONE);
+                createBtn.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        AlertDialog.Builder dialog = new AlertDialog.Builder(getContext());
+                        dialog.setTitle("New album");
+                        final EditText myInput = new EditText(getContext());
+                        dialog.setView(myInput);
+
+                        dialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                String temp = myInput.getText().toString();
+                                if (!temp.equals("")) {
+                                    File newDir = new File(getActivity().getFilesDir(), temp);
+                                    if (newDir.exists() && newDir.isDirectory()) {
+                                        Toast.makeText(getContext(), "Album already exist", Toast.LENGTH_LONG).show();
+                                    } else {
+                                        newDir.mkdir();
+                                        getChildFragmentManager().beginTransaction().replace(R.id.albumHolder, new FileListFragment()).commit();
+                                    }
+                                }
+                            }
+                        });
+
+                        dialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                dialogInterface.cancel();
+                            }
+                        });
+                        dialog.show();
+
+
+                    }
+                });
+                returnBtn.setVisibility(View.GONE);
+
             }
         });
         createBtn.setOnClickListener(new View.OnClickListener() {
@@ -119,7 +202,7 @@ public class AlbumFragment extends Fragment {
                 activityLauncher.launch(intent);
             }
         });
-        getChildFragmentManager().beginTransaction().replace(R.id.albumHolder, PictureGridFragment.newInstance(folder)).commit();
+        getChildFragmentManager().beginTransaction().replace(R.id.albumHolder, PictureGridFragment.newInstance(folder, activityLauncher)).commit();
 
     }
 
