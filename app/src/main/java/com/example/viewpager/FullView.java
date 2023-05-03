@@ -70,7 +70,7 @@ public class FullView extends AppCompatActivity {
         removeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean t = file.delete();
+                file.delete();
                 intent.putExtra("filepath", "");
                 setResult(Activity.RESULT_OK, intent);
                 finish();
@@ -111,7 +111,7 @@ public class FullView extends AppCompatActivity {
 
                 Map<String, Object> docData = new HashMap<>();
                 docData.put("user", user.getUid());
-                docData.put("like", 0);
+                docData.put("like", (long) 0);
                 db.collection("posts").add(docData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                     @Override
                     public void onSuccess(DocumentReference documentReference) {
@@ -128,7 +128,7 @@ public class FullView extends AppCompatActivity {
                             @Override
                             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                                 Toast.makeText(context,"Upload succeeded", Toast.LENGTH_LONG).show();
-
+                                db.collection("users").document(user.getUid()).collection("posted").document(docid).set(docData);
                             }
                         });
                     }

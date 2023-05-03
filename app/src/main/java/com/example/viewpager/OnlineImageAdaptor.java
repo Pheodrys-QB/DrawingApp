@@ -49,7 +49,6 @@ public class OnlineImageAdaptor extends BaseAdapter {
     }
     public void reset(){
         this.pictures.clear();
-        notifyDataSetChanged();
     }
 
     @Override
