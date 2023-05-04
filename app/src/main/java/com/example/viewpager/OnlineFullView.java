@@ -29,6 +29,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.File;
+import java.util.Map;
 import java.util.UUID;
 
 public class OnlineFullView extends AppCompatActivity {
@@ -43,6 +44,7 @@ public class OnlineFullView extends AppCompatActivity {
     private TextView username;
     private ImageView favoriteBtn;
     private ImageView downloadBtn;
+    private Map<String, Object> data;
 
     private class getImgThread extends Thread {
         private String imgID;
@@ -109,6 +111,34 @@ public class OnlineFullView extends AppCompatActivity {
 
         String imgID = getIntent().getStringExtra("imageID");
         if (imgID == null) return;
+
+        db.collection("posts").document(imgID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document.exists()) {
+                        docref = document.getReference();
+                        data = document.getData();
+                        String artistID = document.get("user").toString();
+                        username.setText("");
+                        db.collection("users").document(artistID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task2) {
+                                if (task2.isSuccessful()) {
+                                    DocumentSnapshot document2 = task2.getResult();
+                                    if (document2.exists()) {
+                                        username.setText(document2.get("username").toString());
+                                    }
+                                }
+                            }
+                        });
+                        like = (long) document.get("like");
+                    }
+                }
+
+            }
+        });
         if (user != null) {
             db.collection("users").document(user.getUid()).collection("liked").document(imgID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
                 @Override
@@ -131,40 +161,16 @@ public class OnlineFullView extends AppCompatActivity {
                     if (toLike > 0) {
                         favoriteBtn.setColorFilter(Color.argb(255, 255, 255, 255));
                         // remove from liked
+                        db.collection("users").document(user.getUid()).collection("liked").document(imgID).delete();
                     } else {
                         favoriteBtn.setColorFilter(Color.argb(255, 255, 0, 0));
                         // add to liked
+                        db.collection("users").document(user.getUid()).collection("liked").document(imgID).set(data);
+
                     }
                 }
             });
         }
-
-        db.collection("posts").document(imgID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if (task.isSuccessful()) {
-                    DocumentSnapshot document = task.getResult();
-                    if (document.exists()) {
-                        docref = document.getReference();
-                        String artistID = document.get("user").toString();
-                        username.setText("");
-                        db.collection("users").document(artistID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-                            @Override
-                            public void onComplete(@NonNull Task<DocumentSnapshot> task2) {
-                                if (task2.isSuccessful()) {
-                                    DocumentSnapshot document2 = task2.getResult();
-                                    if (document2.exists()) {
-                                        username.setText(document2.get("username").toString());
-                                    }
-                                }
-                            }
-                        });
-                        like = (long) document.get("like");
-                    }
-                }
-
-            }
-        });
 
 
         getImgThread nt = new getImgThread(imgID);

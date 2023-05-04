@@ -333,10 +333,9 @@ public class CommunityFragment extends Fragment {
                 if (totalLimit - lastItem <= THRESHOLD) {
                     if (!isLoading) {
                         isLoading = true;
-                        // here you have reached end of list, load more data into adaptor
-                        // update beginDoc
-                        // update totalAmount
-                        // update isLoading
+                        downloadThread nt = new downloadThread(mode, addLimit, beginDoc,false);
+                        nt.start();
+
                     }
                 }
             }
