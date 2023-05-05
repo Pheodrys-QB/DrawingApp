@@ -11,20 +11,26 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 
 public class OnlineImageAdaptor extends BaseAdapter {
-    private class Image{
+    private class Image {
         Bitmap bm;
         String id;
-        Image(Bitmap b, String i){
+        String artist;
+
+        Image(Bitmap b, String i, String a) {
             bm = b;
             id = i;
+            artist = a;
         }
     }
+
     private ArrayList<Image> pictures;
     private Context mContext;
+
     public OnlineImageAdaptor(Context mContext) {
         this.mContext = mContext;
         this.pictures = new ArrayList<>();
     }
+
     @Override
     public int getCount() {
         return pictures.size();
@@ -40,14 +46,20 @@ public class OnlineImageAdaptor extends BaseAdapter {
         return 0;
     }
 
-    public void add(Bitmap bm, String id){
-        Image newItem = new Image(bm, id);
+    public void add(Bitmap bm, String id, String artist) {
+        Image newItem = new Image(bm, id, artist);
         this.pictures.add(newItem);
     }
-    public String getID(int i){
+
+    public String getID(int i) {
         return this.pictures.get(i).id;
     }
-    public void reset(){
+
+    public String getArtist(int i) {
+        return this.pictures.get(i).artist;
+    }
+
+    public void reset() {
         this.pictures.clear();
     }
 
@@ -55,9 +67,9 @@ public class OnlineImageAdaptor extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ImageView imageView = (ImageView) convertView;
 
-        if(imageView == null){
+        if (imageView == null) {
             imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(350,450));
+            imageView.setLayoutParams(new GridView.LayoutParams(350, 350));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
 

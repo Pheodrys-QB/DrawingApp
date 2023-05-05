@@ -34,6 +34,8 @@ import java.util.UUID;
 public class FullView extends AppCompatActivity {
 
     private String filepath;
+    private String imgID;
+    private boolean isProfile = false;
     FirebaseFirestore db;
     FirebaseUser user;
     FirebaseStorage storage;
@@ -47,35 +49,89 @@ public class FullView extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         storage = FirebaseStorage.getInstance();
         context = this;
-
         Intent intent = getIntent();
 
         ImageView imageView = findViewById(R.id.img_full);
-        filepath = intent.getExtras().getString("filepath");
-        File file = new File(filepath);
-        Bitmap myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
-
-        imageView.setImageBitmap(myBitmap);
-
         ImageView editBtn = findViewById(R.id.edit);
-        editBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setResult(Activity.RESULT_OK, intent);
-                finish();
-            }
-        });
-
         ImageView removeBtn = findViewById(R.id.trashcan);
-        removeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                file.delete();
-                intent.putExtra("filepath", "");
-                setResult(Activity.RESULT_OK, intent);
-                finish();
-            }
-        });
+        ImageView postBtn = findViewById(R.id.upload);
+
+
+        isProfile = intent.getBooleanExtra("yourImage", false);
+        if (!isProfile) {
+            filepath = intent.getStringExtra("filepath");
+            File file = new File(filepath);
+            Bitmap myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+
+            imageView.setImageBitmap(myBitmap);
+
+            editBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                }
+            });
+            removeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    file.delete();
+                    intent.putExtra("filepath", "");
+                    setResult(Activity.RESULT_OK, intent);
+                    finish();
+                }
+            });
+
+            postBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (user == null) return;
+                    ByteArrayOutputStream stream = new ByteArrayOutputStream();
+
+                    myBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+                    byte[] byteArray = stream.toByteArray();
+
+
+                    Map<String, Object> docData = new HashMap<>();
+                    docData.put("user", user.getUid());
+                    docData.put("like", (long) 0);
+                    db.collection("posts").add(docData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            String docid = documentReference.getId();
+                            StorageReference imgRef = storage.getReference().child("images/" + docid + ".png");
+
+                            UploadTask uploadTask = imgRef.putBytes(byteArray);
+                            uploadTask.addOnFailureListener(new OnFailureListener() {
+                                @Override
+                                public void onFailure(@NonNull Exception e) {
+                                    Toast.makeText(context, "Fail to upload", Toast.LENGTH_LONG).show();
+                                }
+                            }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                                @Override
+                                public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                                    Toast.makeText(context, "Upload succeeded", Toast.LENGTH_LONG).show();
+                                    db.collection("users").document(user.getUid()).collection("posted").document(docid).set(docData);
+                                }
+                            });
+                        }
+                    });
+                }
+            });
+        } else {
+            String imgID = intent.getStringExtra("imgID");
+
+            editBtn.setVisibility(View.GONE);
+            postBtn.setVisibility(View.GONE);
+            // download image
+            removeBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    //Remove from post
+                }
+            });
+        }
+
 
         ImageView downloadBtn = findViewById(R.id.download);
         downloadBtn.setOnClickListener(new View.OnClickListener() {
@@ -98,42 +154,8 @@ public class FullView extends AppCompatActivity {
             }
         });
 
-        ImageView postBtn = findViewById(R.id.upload);
-        postBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (user == null) return;
-                ByteArrayOutputStream stream = new ByteArrayOutputStream();
-
-                myBitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
-                byte[] byteArray = stream.toByteArray();
 
 
-                Map<String, Object> docData = new HashMap<>();
-                docData.put("user", user.getUid());
-                docData.put("like", (long) 0);
-                db.collection("posts").add(docData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                    @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        String docid = documentReference.getId();
-                        StorageReference imgRef = storage.getReference().child("images/" + docid + ".png");
 
-                        UploadTask uploadTask = imgRef.putBytes(byteArray);
-                        uploadTask.addOnFailureListener(new OnFailureListener() {
-                            @Override
-                            public void onFailure(@NonNull Exception e) {
-                                Toast.makeText(context,"Fail to upload", Toast.LENGTH_LONG).show();
-                            }
-                        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-                            @Override
-                            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                                Toast.makeText(context,"Upload succeeded", Toast.LENGTH_LONG).show();
-                                db.collection("users").document(user.getUid()).collection("posted").document(docid).set(docData);
-                            }
-                        });
-                    }
-                });
-            }
-        });
     }
 }

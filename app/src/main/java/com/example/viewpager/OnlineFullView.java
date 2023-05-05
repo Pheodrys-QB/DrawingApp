@@ -110,6 +110,7 @@ public class OnlineFullView extends AppCompatActivity {
 
 
         String imgID = getIntent().getStringExtra("imageID");
+        boolean isProfile = getIntent().getBooleanExtra("yourImage", false);
         if (imgID == null) return;
 
         db.collection("posts").document(imgID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
@@ -134,6 +135,20 @@ public class OnlineFullView extends AppCompatActivity {
                             }
                         });
                         like = (long) document.get("like");
+                    }else{
+                        db.collection("users").document(user.getUid()).collection("liked").document(imgID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if (task.isSuccessful()) {
+                                    DocumentSnapshot document = task.getResult();
+                                    if (document.exists()) {
+                                        document.getReference().delete();
+                                    }
+                                }
+
+                            }
+                        });
+                        finish();
                     }
                 }
 

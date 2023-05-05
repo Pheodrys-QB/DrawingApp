@@ -59,6 +59,7 @@ public class CommunityFragment extends Fragment {
     private OnlineImageAdaptor adaptor;
     private FirebaseStorage storage;
     private FirebaseFirestore db;
+    private FirebaseUser user;
     private DocumentSnapshot beginDoc;
     private SwipeRefreshLayout refreshLayout;
     private int totalAmount = 0;
@@ -123,7 +124,7 @@ public class CommunityFragment extends Fragment {
                                         public void onSuccess(byte[] bytes) {
                                             // Data for "images/island.jpg" is returns, use this as needed
                                             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                            adaptor.add(bitmap, doc.getId());
+                                            adaptor.add(bitmap, doc.getId(), doc.get("user").toString());
 
                                             if (count == snapshotCount) {
                                                 getActivity().runOnUiThread(new Runnable() {
@@ -183,7 +184,7 @@ public class CommunityFragment extends Fragment {
                                         public void onSuccess(byte[] bytes) {
                                             // Data for "images/island.jpg" is returns, use this as needed
                                             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                            adaptor.add(bitmap, doc.getId());
+                                            adaptor.add(bitmap, doc.getId(), doc.get("user").toString());
                                             if (count == snapshotCount) {
                                                 getActivity().runOnUiThread(new Runnable() {
 
@@ -252,6 +253,7 @@ public class CommunityFragment extends Fragment {
         View curView = inflater.inflate(R.layout.fragment_community, container, false);
         storage = FirebaseStorage.getInstance();
         db = FirebaseFirestore.getInstance();
+        user = FirebaseAuth.getInstance().getCurrentUser();
 
         popularTab = curView.findViewById(R.id.popular);
         recentTab = curView.findViewById(R.id.recent);
@@ -313,13 +315,20 @@ public class CommunityFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent i = new Intent(getContext(), OnlineFullView.class);
 
                 String imgId = adaptor.getID(position);
+                String artist = adaptor.getArtist(position);
+                if (user == null || !artist.equals(user.getUid())) {
+                    Intent i = new Intent(getContext(), OnlineFullView.class);
+                    i.putExtra("imageID", imgId);
+                    startActivity(i);
+                } else {
+                    Intent i = new Intent(getContext(), FullView.class);
+                    i.putExtra("imageID", imgId);
+                    i.putExtra("yourImage", true);
+                    startActivity(i);
+                }
 
-                i.putExtra("imageID", imgId);
-
-                startActivity(i);
             }
         });
         gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
@@ -333,7 +342,7 @@ public class CommunityFragment extends Fragment {
                 if (totalLimit - lastItem <= THRESHOLD) {
                     if (!isLoading) {
                         isLoading = true;
-                        downloadThread nt = new downloadThread(mode, addLimit, beginDoc,false);
+                        downloadThread nt = new downloadThread(mode, addLimit, beginDoc, false);
                         nt.start();
 
                     }

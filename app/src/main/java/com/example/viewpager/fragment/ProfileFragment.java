@@ -19,6 +19,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.example.viewpager.FullView;
 import com.example.viewpager.MainActivity;
 import com.example.viewpager.OnlineFullView;
 import com.example.viewpager.OnlineImageAdaptor;
@@ -123,7 +124,7 @@ public class ProfileFragment extends Fragment {
                                         public void onSuccess(byte[] bytes) {
                                             // Data for "images/island.jpg" is returns, use this as needed
                                             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                            adaptor.add(bitmap, doc.getId());
+                                            adaptor.add(bitmap, doc.getId(), doc.get("user").toString());
 
                                             if (count == snapshotCount) {
                                                 getActivity().runOnUiThread(new Runnable() {
@@ -189,7 +190,7 @@ public class ProfileFragment extends Fragment {
                                         public void onSuccess(byte[] bytes) {
                                             // Data for "images/island.jpg" is returns, use this as needed
                                             Bitmap bitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
-                                            adaptor.add(bitmap, doc.getId());
+                                            adaptor.add(bitmap, doc.getId(), doc.get("user").toString());
                                             if (count == snapshotCount) {
                                                 getActivity().runOnUiThread(new Runnable() {
 
@@ -272,6 +273,8 @@ public class ProfileFragment extends Fragment {
         TextView textView = curView.findViewById(R.id.profileUsername);
         textView.setText(username);
         mText = textView;
+        if(mUser == null) return curView;
+
         curView.findViewById(R.id.logoutBtn).setOnClickListener(new View.OnClickListener() {
                                                                     @Override
                                                                     public void onClick(View view) {
@@ -282,7 +285,7 @@ public class ProfileFragment extends Fragment {
                                                                 }
         );
 
-        if(mUser == null) return curView;
+
 
         postTab = curView.findViewById(R.id.post);
         likeTab = curView.findViewById(R.id.like);
@@ -308,9 +311,9 @@ public class ProfileFragment extends Fragment {
         postTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                recentTab.setBackgroundColor(Color.TRANSPARENT);
-                popularTab.setBackgroundColor(Color.WHITE);
-                mode = 1;
+                likeTab.setBackgroundColor(Color.TRANSPARENT);
+                postTab.setBackgroundColor(Color.WHITE);
+                mode = 0;
                 isLoading = true;
                 refreshLayout.setRefreshing(true);
                 adaptor.reset();
@@ -321,9 +324,9 @@ public class ProfileFragment extends Fragment {
         likeTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                recentTab.setBackgroundColor(Color.WHITE);
-                popularTab.setBackgroundColor(Color.TRANSPARENT);
-                mode = 0;
+                likeTab.setBackgroundColor(Color.WHITE);
+                postTab.setBackgroundColor(Color.TRANSPARENT);
+                mode = 1;
                 isLoading = true;
                 refreshLayout.setRefreshing(true);
                 adaptor.reset();
@@ -332,7 +335,7 @@ public class ProfileFragment extends Fragment {
             }
         });
         adaptor = new OnlineImageAdaptor(this.getContext());
-        GridView gridView = curView.findViewById(R.id.imageGrid);
+        GridView gridView = curView.findViewById(R.id.imageGrid_profile);
 
         isLoading = true;
         downloadThread dt = new downloadThread(mode, addLimit, beginDoc, true);
@@ -344,13 +347,21 @@ public class ProfileFragment extends Fragment {
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long id) {
-                Intent i = new Intent(getContext(), OnlineFullView.class);
 
                 String imgId = adaptor.getID(position);
 
-                i.putExtra("imageID", imgId);
+                if(mode == 0){
+                    Intent i = new Intent(getContext(), FullView.class);
+                    i.putExtra("imageID", imgId);
+                    i.putExtra("yourImage", true);
+                    startActivity(i);
+                }
+                if (mode == 1) {
+                    Intent i = new Intent(getContext(), OnlineFullView.class);
+                    i.putExtra("imageID", imgId);
+                    startActivity(i);
+                }
 
-                startActivity(i);
             }
         });
         gridView.setOnScrollListener(new AbsListView.OnScrollListener() {
