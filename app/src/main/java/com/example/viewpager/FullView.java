@@ -35,11 +35,69 @@ public class FullView extends AppCompatActivity {
 
     private String filepath;
     private String imgID;
-    private boolean isProfile = false;
+    private boolean isMine = false;
     FirebaseFirestore db;
     FirebaseUser user;
     FirebaseStorage storage;
     Context context;
+
+    ImageView imageView;
+    ImageView editBtn;
+    ImageView removeBtn;
+    ImageView postBtn;
+    ImageView downloadBtn;
+
+    Bitmap myBitmap;
+
+
+    private class getImgThread extends Thread {
+        private String imgID;
+
+        getImgThread(String id) {
+            this.imgID = id;
+        }
+
+        public void run() {
+            StorageReference islandRef = storage.getReference().child("images/" + imgID + ".png");
+
+            final long ONE_MEGABYTE = 1024 * 1024;
+            islandRef.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                @Override
+                public void onSuccess(byte[] bytes) {
+                    // Data for "images/island.jpg" is returns, use this as needed
+                    myBitmap = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            imageView.setImageBitmap(myBitmap);
+                            downloadBtn.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    imageView.setDrawingCacheEnabled(true);
+                                    String imgSaved = MediaStore.Images.Media.insertImage(
+                                            getContentResolver(), imageView.getDrawingCache(),
+                                            UUID.randomUUID().toString() + ".png", "drawing");
+                                    if (imgSaved != null) {
+                                        Toast savedToast = Toast.makeText(getApplicationContext(),
+                                                "Drawing downloaded to Gallery!", Toast.LENGTH_SHORT);
+                                        savedToast.show();
+                                    } else {
+                                        Toast unsavedToast = Toast.makeText(getApplicationContext(),
+                                                "Oops! Image could not be downloaded.", Toast.LENGTH_SHORT);
+                                        unsavedToast.show();
+                                    }
+                                    imageView.destroyDrawingCache();
+                                }
+                            });
+                        }
+                    });
+
+                }
+            });
+
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,17 +109,17 @@ public class FullView extends AppCompatActivity {
         context = this;
         Intent intent = getIntent();
 
-        ImageView imageView = findViewById(R.id.img_full);
-        ImageView editBtn = findViewById(R.id.edit);
-        ImageView removeBtn = findViewById(R.id.trashcan);
-        ImageView postBtn = findViewById(R.id.upload);
+        imageView = findViewById(R.id.img_full);
+        editBtn = findViewById(R.id.edit);
+        removeBtn = findViewById(R.id.trashcan);
+        postBtn = findViewById(R.id.upload);
 
 
-        isProfile = intent.getBooleanExtra("yourImage", false);
-        if (!isProfile) {
+        isMine = intent.getBooleanExtra("yourImage", false);
+        if (!isMine) {
             filepath = intent.getStringExtra("filepath");
             File file = new File(filepath);
-            Bitmap myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
+            myBitmap = BitmapFactory.decodeFile(file.getAbsolutePath());
 
             imageView.setImageBitmap(myBitmap);
 
@@ -119,21 +177,27 @@ public class FullView extends AppCompatActivity {
                 }
             });
         } else {
-            String imgID = intent.getStringExtra("imgID");
+            imgID = intent.getStringExtra("imageID");
+            if (imgID == null) return;
+            getImgThread nt = new getImgThread(imgID);
+            nt.start();
 
             editBtn.setVisibility(View.GONE);
             postBtn.setVisibility(View.GONE);
-            // download image
+
+
             removeBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //Remove from post
+                    db.collection("posts").document(imgID).delete();
+                    db.collection("users").document(user.getUid()).collection("posted").document(imgID).delete();
+                    finish();
                 }
             });
         }
 
 
-        ImageView downloadBtn = findViewById(R.id.download);
+        downloadBtn = findViewById(R.id.download);
         downloadBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -153,8 +217,6 @@ public class FullView extends AppCompatActivity {
                 imageView.destroyDrawingCache();
             }
         });
-
-
 
 
     }

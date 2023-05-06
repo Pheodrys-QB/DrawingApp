@@ -57,7 +57,7 @@ public class ProfileFragment extends Fragment {
     private FirebaseStorage storage;
     private DocumentSnapshot beginDoc;
     private int totalAmount = 0;
-    private int totalLimit = 0;
+    private int totalLimit = 30;
     private int addLimit = 30;
     private int count;
     private OnlineImageAdaptor adaptor;
@@ -107,7 +107,23 @@ public class ProfileFragment extends Fragment {
 
 
                                 int snapshotCount = documentSnapshots.size() - 1;
-                                if (snapshotCount == -1) return;
+                                if (snapshotCount == -1) {
+                                    getActivity().runOnUiThread(new Runnable() {
+
+                                        @Override
+                                        public void run() {
+                                            Log.d("Download iamge", "notify");
+
+                                            adaptor.notifyDataSetChanged();
+                                            Log.d("Download iamge", "end");
+
+                                            isLoading = false;
+                                            refreshLayout.setRefreshing(false);
+
+                                        }
+                                    });
+                                    return;
+                                }
                                 beginDoc = documentSnapshots.getDocuments()
                                         .get(snapshotCount);
                                 totalAmount += snapshotCount;
@@ -175,7 +191,23 @@ public class ProfileFragment extends Fragment {
                             @Override
                             public void onSuccess(QuerySnapshot documentSnapshots) {
                                 int snapshotCount = documentSnapshots.size() - 1;
-                                if (snapshotCount == -1) return;
+                                if (snapshotCount == -1){
+                                    getActivity().runOnUiThread(new Runnable() {
+
+                                        @Override
+                                        public void run() {
+                                            Log.d("Download iamge", "notify");
+
+                                            adaptor.notifyDataSetChanged();
+                                            Log.d("Download iamge", "end");
+
+                                            isLoading = false;
+                                            refreshLayout.setRefreshing(false);
+
+                                        }
+                                    });
+                                    return;
+                                }
                                 beginDoc = documentSnapshots.getDocuments()
                                         .get(snapshotCount);
                                 totalAmount += snapshotCount;

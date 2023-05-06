@@ -64,7 +64,7 @@ public class CommunityFragment extends Fragment {
     private SwipeRefreshLayout refreshLayout;
     private int totalAmount = 0;
     private int addLimit = 30;
-    private int totalLimit = 0;
+    private int totalLimit = 30;
     private boolean isLoading;
     private int THRESHOLD = 3;
     private int mode = 0;
@@ -107,7 +107,22 @@ public class CommunityFragment extends Fragment {
 
 
                                 int snapshotCount = documentSnapshots.size() - 1;
-                                if (snapshotCount == -1) return;
+                                if (snapshotCount == -1) {
+                                    getActivity().runOnUiThread(new Runnable() {
+
+                                        @Override
+                                        public void run() {
+                                            Log.d("Download iamge", "deadend");
+
+                                            adaptor.notifyDataSetChanged();
+
+                                            isLoading = false;
+                                            refreshLayout.setRefreshing(false);
+
+                                        }
+                                    });
+                                    return;
+                                }
                                 beginDoc = documentSnapshots.getDocuments()
                                         .get(snapshotCount);
                                 totalAmount += snapshotCount;
@@ -153,6 +168,22 @@ public class CommunityFragment extends Fragment {
 
                         });
             } else {
+                if (beginDoc == null) {
+                    getActivity().runOnUiThread(new Runnable() {
+
+                        @Override
+                        public void run() {
+                            Log.d("Download iamge", "deadend");
+
+                            adaptor.notifyDataSetChanged();
+
+                            isLoading = false;
+                            refreshLayout.setRefreshing(false);
+
+                        }
+                    });
+                    return;
+                }
                 Query next = db.collection("posts");
                 if (mode == 1) {
                     next = next.orderBy("like", Query.Direction.DESCENDING);
@@ -169,7 +200,23 @@ public class CommunityFragment extends Fragment {
                             @Override
                             public void onSuccess(QuerySnapshot documentSnapshots) {
                                 int snapshotCount = documentSnapshots.size() - 1;
-                                if (snapshotCount == -1) return;
+                                if (snapshotCount == -1) {
+                                    getActivity().runOnUiThread(new Runnable() {
+
+                                        @Override
+                                        public void run() {
+                                            Log.d("Download iamge", "notify");
+
+                                            adaptor.notifyDataSetChanged();
+                                            Log.d("Download iamge", "end");
+
+                                            isLoading = false;
+                                            refreshLayout.setRefreshing(false);
+
+                                        }
+                                    });
+                                    return;
+                                }
                                 beginDoc = documentSnapshots.getDocuments()
                                         .get(snapshotCount);
                                 totalAmount += snapshotCount;
@@ -264,6 +311,8 @@ public class CommunityFragment extends Fragment {
             @Override
             public void onRefresh() {
                 if (!isLoading) {
+                    Log.d("Refresh", "deadend");
+
                     isLoading = true;
                     totalAmount = 0;
                     adaptor.reset();
@@ -308,7 +357,6 @@ public class CommunityFragment extends Fragment {
         isLoading = true;
         downloadThread dt = new downloadThread(mode, addLimit, beginDoc, true);
         dt.start();
-        // update beginDoc
 
         gridView.setAdapter(adaptor);
         adaptor.notifyDataSetChanged();

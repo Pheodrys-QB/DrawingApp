@@ -110,7 +110,6 @@ public class OnlineFullView extends AppCompatActivity {
 
 
         String imgID = getIntent().getStringExtra("imageID");
-        boolean isProfile = getIntent().getBooleanExtra("yourImage", false);
         if (imgID == null) return;
 
         db.collection("posts").document(imgID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
