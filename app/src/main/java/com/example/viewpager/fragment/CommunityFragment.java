@@ -126,7 +126,6 @@ public class CommunityFragment extends Fragment {
                                 beginDoc = documentSnapshots.getDocuments()
                                         .get(snapshotCount);
                                 totalAmount += snapshotCount;
-                                totalLimit += addLimit;
                                 count = 0;
                                 for (DocumentSnapshot doc : documentSnapshots.getDocuments()) {
                                     Log.d("Download iamge", doc.getId());
@@ -312,6 +311,7 @@ public class CommunityFragment extends Fragment {
             public void onRefresh() {
                 if (!isLoading) {
                     Log.d("Refresh", "deadend");
+                    totalLimit = 30;
 
                     isLoading = true;
                     totalAmount = 0;
@@ -328,6 +328,7 @@ public class CommunityFragment extends Fragment {
         popularTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                totalLimit = 30;
                 recentTab.setBackgroundColor(Color.TRANSPARENT);
                 popularTab.setBackgroundColor(Color.WHITE);
                 mode = 1;
@@ -341,6 +342,7 @@ public class CommunityFragment extends Fragment {
         recentTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                totalLimit = 30;
                 recentTab.setBackgroundColor(Color.WHITE);
                 popularTab.setBackgroundColor(Color.TRANSPARENT);
                 mode = 0;

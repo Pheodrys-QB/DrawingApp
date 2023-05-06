@@ -127,7 +127,6 @@ public class ProfileFragment extends Fragment {
                                 beginDoc = documentSnapshots.getDocuments()
                                         .get(snapshotCount);
                                 totalAmount += snapshotCount;
-                                totalLimit += addLimit;
                                 count = 0;
                                 for (DocumentSnapshot doc : documentSnapshots.getDocuments()) {
                                     Log.d("Download iamge", doc.getId());
@@ -328,6 +327,7 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onRefresh() {
                 if (!isLoading) {
+                    totalLimit = 30;
                     isLoading = true;
                     totalAmount = 0;
                     adaptor.reset();
@@ -343,6 +343,8 @@ public class ProfileFragment extends Fragment {
         postTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                totalLimit = 30;
+
                 likeTab.setBackgroundColor(Color.TRANSPARENT);
                 postTab.setBackgroundColor(Color.WHITE);
                 mode = 0;
@@ -356,6 +358,8 @@ public class ProfileFragment extends Fragment {
         likeTab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                totalLimit = 30;
+
                 likeTab.setBackgroundColor(Color.WHITE);
                 postTab.setBackgroundColor(Color.TRANSPARENT);
                 mode = 1;
