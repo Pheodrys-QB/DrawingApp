@@ -39,8 +39,8 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 
 public class drawing extends Activity {
     public static Path path = new Path();
-    Bundle myBundle;
-    Button pencil, eraser, color_button, zoomImg, newPaint, save, dowloadImg, eyedropper;
+    private Activity act;
+    Button pencil, eraser, color_button, zoomImg, newPaint, save, cancel, eyedropper;
     int mDefault;
     View imgView, motionLayer;
     float offsetX, offsetY, refX, refY;
@@ -80,7 +80,7 @@ public class drawing extends Activity {
         zoomImg = (Button) findViewById(R.id.zoomImg);
         newPaint = (Button) findViewById(R.id.newPaint);
         save = (Button) findViewById(R.id.save);
-        dowloadImg = (Button) findViewById(R.id.dowloadImg);
+        cancel = (Button) findViewById(R.id.cancel);
 
         pencil.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -135,7 +135,7 @@ public class drawing extends Activity {
             }
         });
 
-        dowloadImg.setOnClickListener(new View.OnClickListener() {
+        cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 dowloadImage();
@@ -260,10 +260,7 @@ public class drawing extends Activity {
                             e.printStackTrace();
                         }
                     }
-
-
                 }
-
             }
         });
         saveDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -276,24 +273,11 @@ public class drawing extends Activity {
 
     private void dowloadImage() {
         AlertDialog.Builder downDialog = new AlertDialog.Builder(this);
-        downDialog.setTitle("Download drawing");
-        downDialog.setMessage("Download drawing to device Gallery?");
+        downDialog.setTitle("Cancel drawing");
+        downDialog.setMessage("Are you sure to cancel the drawing?");
         downDialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface dialog, int which) {
-                imgView.setDrawingCacheEnabled(true);
-                String imgSaved = MediaStore.Images.Media.insertImage(
-                        getContentResolver(), imgView.getDrawingCache(),
-                        UUID.randomUUID().toString() + ".png", "drawing");
-                if (imgSaved != null) {
-                    Toast savedToast = Toast.makeText(getApplicationContext(),
-                            "Drawing downloaded to Gallery!", Toast.LENGTH_SHORT);
-                    savedToast.show();
-                } else {
-                    Toast unsavedToast = Toast.makeText(getApplicationContext(),
-                            "Oops! Image could not be downloaded.", Toast.LENGTH_SHORT);
-                    unsavedToast.show();
-                }
-                imgView.destroyDrawingCache();
+                startActivity(new Intent(drawing.this, MainActivity.class));
             }
         });
         downDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

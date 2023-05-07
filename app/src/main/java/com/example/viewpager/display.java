@@ -64,7 +64,6 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
 
     }
 
-
     public display(Context context) {
         super(context);
         scaleDetector = new ScaleGestureDetector(context, new ScaleListener());

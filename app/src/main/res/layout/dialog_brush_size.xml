@@ -27,7 +27,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/brush_size"
-        android:textColor="@color/black"/>
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:text="Selected brush size: "/>
 
     <Button
         android:id="@+id/ok_brush_size"

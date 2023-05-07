@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700"
+    android:background="@color/gray"
     tools:context=".drawing">
 
     <LinearLayout
@@ -23,6 +23,53 @@
     </LinearLayout>
 
     <RelativeLayout
+        android:id="@+id/tool_design1"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:layout_gravity="top"
+        android:rotation="-180"
+        android:background="@drawable/tools_design">
+
+        <Button
+            android:id="@+id/newPaint"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/newpaper"
+            android:rotation="-180" />
+
+        <Button
+            android:id="@+id/save"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/newPaint"
+            android:rotation="-180"
+            android:background="@drawable/save_img" />
+
+        <Button
+            android:id="@+id/cancel"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_toLeftOf="@+id/newPaint"
+            android:rotation="-180"
+            android:background="@drawable/cancel" />
+    </RelativeLayout>
+
+    <RelativeLayout
         android:id="@+id/tool_design"
         android:layout_width="match_parent"
         android:layout_height="65dp"
@@ -30,89 +77,63 @@
         android:background="@drawable/tools_design">
 
         <Button
-            android:id="@+id/pencil"
+            android:id="@+id/eraser"
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
-            android:background="@drawable/pencil"
-            android:backgroundTint="#ff0000"
-            android:rotation="-45"
-            android:layout_marginLeft="16dp"/>
-
-        <Button
-            android:id="@+id/eraser"
-            android:layout_width="50dp"
-            android:layout_height="70dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="2dp"
-            android:layout_marginEnd="2dp"
-            android:layout_marginBottom="2dp"
-            android:layout_toRightOf="@+id/pencil"
+            android:layout_toLeftOf="@+id/eyedropper"
             android:background="@drawable/eraser" />
 
         <Button
-            android:id="@+id/color_button"
-            android:layout_width="32dp"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="5dp"
-            android:layout_toRightOf="@+id/eraser"
-            android:background="@drawable/colorpicker" />
+            android:id="@+id/pencil"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_toLeftOf="@+id/eraser"
+            android:background="@drawable/pencil"
+            android:backgroundTint="#ff0000"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="10dp"/>
 
         <Button
             android:id="@+id/eyedropper"
-            android:layout_width="35dp"
-            android:layout_height="40dp"
-            android:layout_centerVertical="true"
-            android:layout_toRightOf="@+id/color_button"
-            android:background="@drawable/eyedropper"
-            android:layout_marginStart="5dp"
-            />
-
-        <Button
-            android:id="@+id/zoomImg"
-            android:layout_width="30dp"
-            android:layout_height="36dp"
-            android:layout_centerVertical="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_toRightOf="@+id/eyedropper"
-            android:background="@drawable/zoom" />
-
-        <Button
-            android:id="@+id/newPaint"
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
-            android:layout_margin="8dp"
-            android:layout_toRightOf="@+id/zoomImg"
-            android:background="@drawable/newpaper" />
+            android:background="@drawable/eyedropper"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="10dp"
+            android:layout_centerInParent="true"/>
 
         <Button
-            android:id="@+id/save"
-            android:layout_width="32dp"
-            android:layout_height="40dp"
+            android:id="@+id/color_button"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_toRightOf="@+id/newPaint"
-            android:background="@drawable/save_img" />
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/eyedropper"
+            android:background="@drawable/colorpicker"/>
 
         <Button
-            android:id="@+id/dowloadImg"
-            android:layout_width="30dp"
-            android:layout_height="36dp"
+            android:id="@+id/zoomImg"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
             android:layout_centerVertical="true"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_toRightOf="@+id/save"
-            android:background="@drawable/dowload" />
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/color_button"
+            android:background="@drawable/zoom" />
     </RelativeLayout>
 </FrameLayout>
