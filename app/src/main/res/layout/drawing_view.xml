@@ -66,8 +66,7 @@
             android:layout_marginBottom="8dp"
             android:layout_toLeftOf="@+id/newPaint"
             android:rotation="-180"
-            android:background="@drawable/save_img"    />
-        <!--            android:background="@drawable/cancel"-->
+            android:background="@drawable/cancel"    />
 
     </RelativeLayout>
 
