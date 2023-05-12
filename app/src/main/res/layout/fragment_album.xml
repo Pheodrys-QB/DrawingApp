@@ -8,8 +8,7 @@
     tools:context=".fragment.AlbumFragment">
 
     <!-- TODO: Update blank fragment layout -->
-
-    <!--    <GridView-->
+        <!--    <GridView-->
     <!--        android:layout_width="wrap_content"-->
     <!--        android:layout_height="wrap_content"-->
     <!--        android:layout_marginTop="10dp"-->
