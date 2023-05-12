@@ -81,28 +81,27 @@
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/eyedropper"
+            android:layout_toStartOf="@+id/eyedropper"
             android:background="@drawable/trashcan" />
         <Button
             android:id="@+id/fill_bucket"
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
-            android:layout_toLeftOf="@+id/pencil"
+            android:layout_toStartOf="@+id/pencil"
             android:background="@drawable/fill_mode" />
 
         <Button
             android:id="@+id/pencil"
             android:layout_width="40dp"
             android:layout_height="50dp"
-            android:layout_toLeftOf="@+id/trashcan"
+            android:layout_toStartOf="@+id/trashcan"
             android:background="@drawable/pencil"
             android:backgroundTint="#ff0000"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginRight="10dp"/>
+            android:layout_marginBottom="8dp" />
 
         <Button
             android:id="@+id/eyedropper"
@@ -114,7 +113,6 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginRight="10dp"
             android:layout_centerInParent="true"/>
 
         <Button
@@ -125,9 +123,8 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
-            android:layout_marginRight="10dp"
             android:layout_marginBottom="8dp"
-            android:layout_toRightOf="@+id/eyedropper"
+            android:layout_toEndOf="@+id/eyedropper"
             android:background="@drawable/colorpicker" />
 
         <Button
@@ -139,8 +136,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginRight="10dp"
-            android:layout_toRightOf="@+id/color_button"
+            android:layout_toEndOf="@+id/color_button"
             android:background="@drawable/zoom" />
         <Button
             android:id="@+id/eraser"
@@ -151,8 +147,7 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
-            android:layout_marginRight="10dp"
-            android:layout_toRightOf="@+id/zoomImg"
+            android:layout_toEndOf="@+id/zoomImg"
             android:background="@drawable/eraser" />
     </RelativeLayout>
 </FrameLayout>

@@ -87,7 +87,6 @@ public class drawing extends Activity {
             @Override
             public void onClick(View view) {
               drawWhiteLine();
-                changeBackgroundColor();
             }
         });
         fillMode.setOnClickListener(new View.OnClickListener() {
@@ -195,6 +194,11 @@ public class drawing extends Activity {
         drawPaint.setStrokeJoin(Paint.Join.ROUND);
         drawPaint.setStrokeCap(Paint.Cap.ROUND);
         mcanvas.drawLine(0, 0, 0, 0, drawPaint);
+    }
+    public void undo(){
+//        implement undo
+
+
     }
     public void currentColor(int c) {
         current_color = c;
