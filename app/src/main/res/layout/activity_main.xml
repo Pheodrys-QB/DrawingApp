@@ -5,7 +5,60 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:id="@+id/mainLayout"
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#5C469C"
+        android:id="@+id/splashLayer">
+
+
+        <ImageView
+            android:id="@+id/paintImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:src="@drawable/microsoftpaint"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/logo"
+            android:layout_width="275dp"
+            android:layout_height="123dp"
+            android:fontFamily="@font/bangers"
+            android:text="Paint Art"
+            android:textColor="#009688"
+            android:textFontWeight="200"
+            android:textSize="70sp"
+            app:layout_constraintBottom_toBottomOf="@+id/paintImage"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.617"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/paintImage"
+            app:layout_constraintVertical_bias="1.0" />
+
+        <TextView
+            android:id="@+id/slogan"
+            android:layout_width="347dp"
+            android:layout_height="60dp"
+            android:fontFamily="@font/bangers"
+            android:text="Share your drawing easily !"
+            android:textSize="33sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.628"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logo"
+            app:layout_constraintVertical_bias="0.436" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
 
     <RelativeLayout
