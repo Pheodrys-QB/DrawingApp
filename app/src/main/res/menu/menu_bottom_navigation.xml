@@ -2,11 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:id="@+id/menu_community"
         android:icon="@drawable/community"
-        android:title="@string/menu_community_title" />
+        android:title="@string/menu_community_title"
+        />
     <item android:id="@+id/menu_album"
-        android:icon="@drawable/album"
+        android:icon="@drawable/ic_baseline_folder_24"
         android:title="@string/menu_album_title" />
     <item android:id="@+id/menu_profile"
         android:icon="@drawable/profile"
-        android:title="@string/menu_profile_title" />
+        android:title="@string/menu_profile_title"
+        />
 </menu>

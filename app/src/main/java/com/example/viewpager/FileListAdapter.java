@@ -51,7 +51,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         File file = filesAndFolders[position];
         String temp = file.getName();
         holder.textView.setText(temp);
-        holder.imageView.setImageResource(R.drawable.album);
+        holder.imageView.setImageResource(R.drawable.ic_baseline_folder_24);
         holder.file = file;
         holder.name = file.getName();
         if(temp.equals("Default")){
