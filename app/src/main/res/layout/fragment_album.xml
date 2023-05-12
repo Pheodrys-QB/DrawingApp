@@ -40,9 +40,10 @@
                 android:src="@drawable/baseline_arrow_left_24" />
 
         </LinearLayout>
+
         <TextView
             android:id="@+id/albumFolderName"
-            android:layout_width="wrap_content"
+            android:layout_width="78dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical |center_horizontal"
             android:fontFamily="@font/bangers"

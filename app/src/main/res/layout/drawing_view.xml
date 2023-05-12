@@ -18,8 +18,7 @@
             layout="@layout/view_display"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_gravity="center"
-            />
+            android:layout_gravity="center" />
     </LinearLayout>
 
     <RelativeLayout
@@ -78,18 +77,25 @@
         android:background="@drawable/tools_design">
 
         <Button
-            android:id="@+id/eraser"
+            android:id="@+id/trashcan"
             android:layout_width="40dp"
             android:layout_height="50dp"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@+id/eyedropper"
-            android:background="@drawable/eraser" />
+            android:background="@drawable/trashcan" />
+        <Button
+            android:id="@+id/fill_bucket"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/pencil"
+            android:background="@drawable/fill_mode" />
 
         <Button
             android:id="@+id/pencil"
             android:layout_width="40dp"
             android:layout_height="50dp"
-            android:layout_toLeftOf="@+id/eraser"
+            android:layout_toLeftOf="@+id/trashcan"
             android:background="@drawable/pencil"
             android:backgroundTint="#ff0000"
             android:layout_marginStart="8dp"
@@ -136,5 +142,17 @@
             android:layout_marginRight="10dp"
             android:layout_toRightOf="@+id/color_button"
             android:background="@drawable/zoom" />
+        <Button
+            android:id="@+id/eraser"
+            android:layout_width="40dp"
+            android:layout_height="50dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="10dp"
+            android:layout_toRightOf="@+id/zoomImg"
+            android:background="@drawable/eraser" />
     </RelativeLayout>
 </FrameLayout>

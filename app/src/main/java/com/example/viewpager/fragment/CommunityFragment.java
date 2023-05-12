@@ -128,7 +128,7 @@ public class CommunityFragment extends Fragment {
                                 totalAmount += snapshotCount;
                                 count = 0;
                                 for (DocumentSnapshot doc : documentSnapshots.getDocuments()) {
-                                    Log.d("Download iamge", doc.getId());
+                                    Log.d("Download image", doc.getId());
 
                                     StorageReference islandRef = storage.getReference().child("images/" + doc.getId() + ".png");
 
@@ -145,10 +145,10 @@ public class CommunityFragment extends Fragment {
 
                                                     @Override
                                                     public void run() {
-                                                        Log.d("Download iamge", "notify");
+                                                        Log.d("Download image", "notify");
 
                                                         adaptor.notifyDataSetChanged();
-                                                        Log.d("Download iamge", "end");
+                                                        Log.d("Download image", "end");
 
                                                         isLoading = false;
                                                         refreshLayout.setRefreshing(false);
@@ -172,7 +172,7 @@ public class CommunityFragment extends Fragment {
 
                         @Override
                         public void run() {
-                            Log.d("Download iamge", "deadend");
+                            Log.d("Download image", "deadend");
 
                             adaptor.notifyDataSetChanged();
 

@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.viewpager.FullView;
 import com.example.viewpager.ImageAdaptor;
@@ -48,7 +49,6 @@ public class PictureGridFragment extends Fragment {
     }
 
 
-    // TODO: Rename and change types and number of parameters
     public static PictureGridFragment newInstance(String folder, ActivityResultLauncher<Intent> activityLauncher) {
         PictureGridFragment fragment = new PictureGridFragment();
         Bundle args = new Bundle();
