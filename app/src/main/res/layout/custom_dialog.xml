@@ -14,7 +14,6 @@
         android:src="@mipmap/ic_launcher_round" />
 
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/img"
@@ -25,33 +24,54 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#000"
             android:text="Full View"
-            android:textColor="#fff" />
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/yellow"
+            android:textColor="@color/black"/>
         <Button
             android:id="@+id/btn_copy"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#000"
             android:text="Copy"
-            android:textColor="#fff" />
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/yellow"
+            android:textColor="@color/black"/>
         <Button
             android:id="@+id/btn_move"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#000"
             android:text="Move"
-            android:textColor="#fff" />
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/yellow"
+            android:textColor="@color/black"/>
 
         <Button
             android:id="@+id/btn_close"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#000"
             android:text="Close"
-            android:textColor="#fff" />
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:backgroundTint="@color/yellow"
+            android:textColor="@color/black"/>
     </LinearLayout>
 </RelativeLayout>
