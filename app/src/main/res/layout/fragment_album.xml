@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#F0DFF3"
     android:orientation="vertical"
     tools:context=".fragment.AlbumFragment">
 
@@ -21,7 +21,8 @@
         android:id="@+id/returnBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
+        android:background="@color/white"
+        android:paddingTop="10dp"
         android:orientation="horizontal"
         >
 
@@ -43,12 +44,12 @@
 
         <TextView
             android:id="@+id/albumFolderName"
-            android:layout_width="78dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical |center_horizontal"
             android:fontFamily="@font/bangers"
             android:text="Album"
-            android:textColor="#2196F3"
+            android:textColor="@color/purple_200"
             android:textSize="25sp"
             android:textStyle="bold" />
 

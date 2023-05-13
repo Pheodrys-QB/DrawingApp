@@ -104,6 +104,7 @@ public class display extends androidx.appcompat.widget.AppCompatImageView {
         scaleFactor = 1.0f;
         mPosX = 0;
         mPosY = 400;
+        isZoom = false;
     }
 
     @Override
