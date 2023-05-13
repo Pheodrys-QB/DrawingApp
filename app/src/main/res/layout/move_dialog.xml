@@ -23,7 +23,9 @@
             android:layout_weight="1"
             android:background="#000"
             android:text="Move"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:drawableLeft="@drawable/upload_file"
+            />
 
         <Button
             android:id="@+id/move_cancel"
@@ -32,7 +34,8 @@
             android:layout_weight="1"
             android:background="#000"
             android:text="Cancel"
-            android:textColor="#fff" />
+            android:textColor="#fff"
+            android:drawableLeft="@drawable/cancel"/>
 
     </LinearLayout>
 </LinearLayout>
