@@ -20,6 +20,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -153,6 +154,7 @@ public class FullView extends AppCompatActivity {
                     Map<String, Object> docData = new HashMap<>();
                     docData.put("user", user.getUid());
                     docData.put("like", (long) 0);
+                    docData.put("timestamp", FieldValue.serverTimestamp());
                     db.collection("posts").add(docData).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {

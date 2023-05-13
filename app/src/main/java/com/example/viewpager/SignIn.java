@@ -76,7 +76,7 @@ public class SignIn extends AppCompatActivity {
 
     private boolean validateReconfirmPassword() {
         String val = confirmPassword.getEditText().getText().toString();
-        String tPassword = email.getEditText().getText().toString();
+        String tPassword = password.getEditText().getText().toString();
         if (val.isEmpty()) {
             confirmPassword.setError("Field must not be empty");
             return false;
