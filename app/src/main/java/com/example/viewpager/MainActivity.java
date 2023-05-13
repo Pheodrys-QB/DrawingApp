@@ -10,8 +10,17 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.example.viewpager.databinding.ActivityMainBinding;
 import com.example.viewpager.fragment.MyViewPager2Adapter;
@@ -27,15 +36,62 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseUser mUser;
     private MainActivity main;
-
+    Boolean isAlreadyExecuted = false;
+//    Splash screen animation
+    Animation topAnim, bottomAnim;
+    ImageView paintImage;
+    TextView logo, slogan;
+//    View splashLayer;
+    private static int SPLASH_SCREEN = 2000;
+//    End of splash screen animation
     ActivityMainBinding binding;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
+//        Splash screen animation
+        topAnim = AnimationUtils.loadAnimation(this,R.anim.top_animation);
+        bottomAnim = AnimationUtils.loadAnimation(this,R.anim.bottom_animation);
+//        Hooks
+       if(!isAlreadyExecuted) {
+           paintImage = findViewById(R.id.paintImage);
+           logo = findViewById(R.id.logo);
+           slogan = findViewById(R.id.slogan);
+
+           paintImage.setAnimation(topAnim);
+           logo.setAnimation(bottomAnim);
+           slogan.setAnimation(bottomAnim);
+           isAlreadyExecuted = true;
+       }
+
+//        new Handler().postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                Intent intent = new Intent(MainActivity.this, MainActivity.class);
+//                startActivity(intent);
+//                View myView = findViewById(R.id.splashLayer);
+//                    ViewGroup parent = (ViewGroup) myView.getParent();
+//                    parent.removeView(myView);
+//                finish();
+//            }
+//        },SPLASH_SCREEN);
+//        End of splash screen animation
+        new android.os.Handler(Looper.getMainLooper()).postDelayed(
+                new Runnable() {
+                    public void run() {
+                        View myView = findViewById(R.id.splashLayer);
+                        ViewGroup parent = (ViewGroup) myView.getParent();
+                        parent.removeView(myView);
+                        isAlreadyExecuted = true;
+                    }
+                },
+                2000);
         mAuth = FirebaseAuth.getInstance();
         mUser = mAuth.getCurrentUser();
         main = this;
+
 
         File defaultFolder = new File(getFilesDir(), "Default");
         if(!defaultFolder.exists()){

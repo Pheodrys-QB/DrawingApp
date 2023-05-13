@@ -9,6 +9,8 @@ import android.widget.BaseAdapter;
 import android.widget.GridView;
 import android.widget.ImageView;
 
+import com.makeramen.roundedimageview.RoundedImageView;
+
 import java.io.File;
 import java.util.List;
 
@@ -37,12 +39,14 @@ public class ImageAdaptor extends BaseAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        ImageView imageView = (ImageView) convertView;
+        RoundedImageView imageView = (RoundedImageView) convertView;
 
         if(imageView == null){
-            imageView = new ImageView(mContext);
-            imageView.setLayoutParams(new GridView.LayoutParams(350,350));
+//            imageView = new ImageView(mContext);
+            imageView = new RoundedImageView(mContext);
+            imageView.setLayoutParams(new GridView.LayoutParams(340,340));
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            imageView.setCornerRadius(40.0f);
         }
 
         Bitmap myBitmap = BitmapFactory.decodeFile(pictures[position].getAbsolutePath());

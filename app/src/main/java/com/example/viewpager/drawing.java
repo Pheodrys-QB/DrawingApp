@@ -8,9 +8,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
 import android.graphics.Path;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
@@ -40,7 +40,7 @@ import yuku.ambilwarna.AmbilWarnaDialog;
 public class drawing extends Activity {
     public static Path path = new Path();
     private Activity act;
-    Button pencil, eraser, color_button, zoomImg, newPaint, save, cancel, eyedropper;
+    Button pencil, trashCan, color_button, zoomImg, newPaint, save, cancel, eyedropper, whiteLine, fillMode;
     int mDefault;
     View imgView, motionLayer;
     float offsetX, offsetY, refX, refY;
@@ -74,14 +74,27 @@ public class drawing extends Activity {
 
         imgView = (View) findViewById(R.id.drawView);
         pencil = (Button) findViewById(R.id.pencil);
-        eraser = (Button) findViewById(R.id.eraser);
+        trashCan = (Button) findViewById(R.id.trashcan);
         color_button = (Button) findViewById(R.id.color_button);
         eyedropper = (Button) findViewById(R.id.eyedropper);
         zoomImg = (Button) findViewById(R.id.zoomImg);
         newPaint = (Button) findViewById(R.id.newPaint);
         save = (Button) findViewById(R.id.save);
         cancel = (Button) findViewById(R.id.cancel);
-
+        whiteLine = (Button) findViewById(R.id.eraser);
+        fillMode = (Button) findViewById(R.id.fill_bucket);
+        whiteLine.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+              drawWhiteLine();
+            }
+        });
+        fillMode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fillMode();
+            }
+        });
         pencil.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -90,7 +103,7 @@ public class drawing extends Activity {
             }
         });
 
-        eraser.setOnClickListener(new View.OnClickListener() {
+        trashCan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 drawPathList.clear();
@@ -153,6 +166,40 @@ public class drawing extends Activity {
 
     }
 
+    private void fillMode() {
+        changeBackgroundColor();
+    }
+
+    public void changeBackgroundColor(){
+//       Open color picker to pick background color
+        AmbilWarnaDialog colorPicker = new AmbilWarnaDialog(this, mDefault, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+            @Override
+            public void onCancel(AmbilWarnaDialog dialog) {}
+            @Override
+            public void onOk(AmbilWarnaDialog dialog, int color) {
+                mDefault = color;
+                bitmap.eraseColor(mDefault);
+            }
+        });
+        colorPicker.show();
+//        Change background to picked color
+        bitmap.eraseColor(mDefault);
+
+
+    }
+    public void drawWhiteLine(){
+        drawPaint.setColor(Color.WHITE);
+        drawPaint.setStrokeWidth(30);
+        drawPaint.setStyle(Paint.Style.STROKE);
+        drawPaint.setStrokeJoin(Paint.Join.ROUND);
+        drawPaint.setStrokeCap(Paint.Cap.ROUND);
+        mcanvas.drawLine(0, 0, 0, 0, drawPaint);
+    }
+    public void undo(){
+//        implement undo
+
+
+    }
     public void currentColor(int c) {
         current_color = c;
 //        path = new Path();

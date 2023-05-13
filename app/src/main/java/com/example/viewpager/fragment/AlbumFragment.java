@@ -42,6 +42,7 @@ public class AlbumFragment extends Fragment {
     private String mParam2;
 
     private LinearLayout returnBtn, createBtn;
+    private TextView AlbumFolderName;
     String foldername = "Default";
     ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -103,6 +104,9 @@ public class AlbumFragment extends Fragment {
 
         returnBtn = albumFragmentView.findViewById(R.id.returnBtn);
         createBtn = albumFragmentView.findViewById(R.id.createDraw);
+        AlbumFolderName = albumFragmentView.findViewById(R.id.albumFolderName);
+
+        AlbumFolderName.setVisibility(View.GONE);
         returnBtn.setVisibility(View.GONE);
         createBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,6 +153,10 @@ public class AlbumFragment extends Fragment {
     public void setDetailFragment(String folder) {
         foldername = folder;
         returnBtn.setVisibility(View.VISIBLE);
+        AlbumFolderName.setVisibility(View.VISIBLE);
+
+        AlbumFolderName.setText(folder);
+
         returnBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -191,6 +199,7 @@ public class AlbumFragment extends Fragment {
                     }
                 });
                 returnBtn.setVisibility(View.GONE);
+                AlbumFolderName.setVisibility(View.GONE);
 
             }
         });

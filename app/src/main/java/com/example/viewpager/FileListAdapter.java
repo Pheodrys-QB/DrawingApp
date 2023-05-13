@@ -51,8 +51,9 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         File file = filesAndFolders[position];
         String temp = file.getName();
         holder.textView.setText(temp);
-        holder.imageView.setImageResource(R.drawable.album);
+        holder.imageView.setImageResource(R.drawable.ic_baseline_folder_24);
         holder.file = file;
+        holder.name = file.getName();
         if(temp.equals("Default")){
             holder.disable();
         }
@@ -71,6 +72,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
         File file;
         RecyclerToFolderlistFragment mLisener;
         View ViewOfItem;
+        String name = "";
 
         public ViewHolder(View itemView, RecyclerToFolderlistFragment listenr) {
             super(itemView);
@@ -81,7 +83,7 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
             ViewOfItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    listenr.onRecyclerToFolderlistFragment(file.getName());
+                    listenr.onRecyclerToFolderlistFragment(name);
                 }
             });
 
@@ -104,13 +106,12 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                                 }
                             }
                             if (item.getTitle().equals("RENAME")) {
-                                Toast.makeText(context.getApplicationContext(), "RENAME ", Toast.LENGTH_SHORT).show();
                                 AlertDialog.Builder dialog = new AlertDialog.Builder(context);
                                 dialog.setTitle("Rename album");
                                 final EditText myInput = new EditText(context);
                                 dialog.setView(myInput);
 
-                                dialog.setPositiveButton("Create", new DialogInterface.OnClickListener() {
+                                dialog.setPositiveButton("Rename", new DialogInterface.OnClickListener() {
                                     @Override
                                     public void onClick(DialogInterface dialogInterface, int i) {
                                         String temp = myInput.getText().toString();
@@ -120,7 +121,8 @@ public class FileListAdapter extends RecyclerView.Adapter<FileListAdapter.ViewHo
                                                 Toast.makeText(context, "Name already taken", Toast.LENGTH_LONG).show();
                                             }else{
                                                 file.renameTo(newDir);
-                                                textView.setText(file.getName());
+                                                name = temp;
+                                                textView.setText(temp);
                                             }
 
                                         }
