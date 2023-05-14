@@ -21,9 +21,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#000"
+            android:backgroundTint="@color/yellow"
             android:text="Move"
-            android:textColor="#fff"
+            android:textColor="@color/black"
+            android:layout_marginRight="3dp"
+            android:layout_marginLeft="8dp"
             android:drawableLeft="@drawable/upload_file"
             />
 
@@ -32,9 +34,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="#000"
+            android:backgroundTint="@color/yellow"
             android:text="Cancel"
-            android:textColor="#fff"
+            android:textColor="@color/black"
+            android:layout_marginRight="8dp"
+            android:layout_marginLeft="3dp"
             android:drawableLeft="@drawable/cancel"/>
 
     </LinearLayout>
